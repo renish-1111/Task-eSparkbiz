@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table,
+      td,
+      tr {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <lable>Row</lable>
+    <input type="number" id="col" />
+    <br />
+    <lable>Col</lable>
+    <input type="number" id="row" />
+    <br />
+    <button onclick="genTable()">Submit</button>
+
+    <br />
+    <lable>Row Delete</lable>
+    <input type="number" id="rowdel" />
+    <button onclick="deleteRow()">Delete</button>
+
+    <br />
+    <lable>Col Delete</lable>
+    <input type="number" id="coldel" />
+    <button onclick="deleteCol()">Delete</button>
+    <br />
+
+    <div id="in"></div>
+    <script>
+      function genTable() {
+        let table = document.getElementById("in").innerHTML;
+        console.log(table);
+
+        let row = document.getElementById("row").value;
+        console.log(row);
+
+        let col = document.getElementById("col").value;
+        console.log(col);
+
+        let text = "";
+        let td = "";
+        let tr = "";
+
+        n = row > col ? row : col;
+
+        for (let i = 0; i < row; i++) {
+          for (let j = 0; j < col; j++) {
+            td += `<td class="${j + 1}">row${i + 1},col${j + 1}</td>`;
+          }
+
+          tr = `<tr id="${i + 1}" class="tr">` + td + "</tr>";
+          text += tr;
+          td = "";
+        }
+        console.log(text);
+
+        document.getElementById("in").innerHTML =
+          `<table id="tableId" >` + text + "</table>";
+      }
+
+      // function deleteCol() {
+      //   let col = document.getElementById("coldel").value;
+      //   console.log(col);
+
+      //   document
+      //     .querySelectorAll("tr")
+      //     .forEach((item) => item.classList.remove(col));
+      // }
+
+      function deleteCol() {
+        let col = parseInt(document.getElementById("coldel").value) - 1;
+
+        const table = document.getElementById("tableId");
+        for (let i = 0; i < table.rows.length; i++) {
+          if (table.rows[i].cells[col]) {
+            table.rows[i].deleteCell(col);
+          }
+        }
+      }
+
+      function deleteRow() {
+        let rowIndex = parseInt(document.getElementById("rowdel").value) - 1;
+
+        document.getElementById("tableId").deleteRow(rowIndex);
+      }
+    </script>
+  </body>
+</html>

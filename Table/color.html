@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      td {
+        background-color: hsla(122, 100%, 50%, 0.704);
+        border: #000000;
+        padding: 40px;
+      }
+
+      body {
+        height: 100vh;
+      }
+
+      #center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        cursor: pointer;
+      }
+    </style>
+    <title> </title>
+  </head>
+  <body>
+    <div id="center">
+      <table id="table">
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+      <button onclick="clickColor()">Click</button>
+      <button onclick="expand()">expand</button>
+    </div>
+    <script>
+      var count = 0;
+      var table = document.getElementById("table");
+      console.log("click");
+
+      table.onclick = () => {
+        var row = Math.floor(Math.random() * table.rows.length);
+        var col = Math.floor(Math.random() * table.rows.length);
+        clickColor(row, col);
+
+        console.log(row, col);
+        table.rows[row].cells[col].onclick = () => {
+          expand();
+        };
+      };
+
+      function expand() {
+        var table = document.getElementById("table");
+
+        for (let i = 0; i < table.rows.length; i++) {
+          table.rows[i].insertCell(-1);
+        }
+        table.insertRow(0);
+        for (let i = 0; i < table.rows.length; i++) {
+          table.rows[0].insertCell(i);
+        }
+        var row = Math.floor(Math.random() * table.rows.length);
+        var col = Math.floor(Math.random() * table.rows.length);
+        clickColor(row, col);
+      }
+      function clickColor(row, col) {
+        let r = Math.floor(Math.random() * 256);
+        let g = Math.floor(Math.random() * 256);
+        let b = Math.floor(Math.random() * 256);
+        console.log(`rgb(${r},${g},${b})`);
+
+        var table = document.getElementById("table");
+        // var row = Math.floor(Math.random() * table.rows.length);
+        // var col = Math.floor(Math.random() * table.rows.length);
+
+        for (let i = 0; i < table.rows.length; i++) {
+          for (let j = 0; j < table.rows.length; j++) {
+            table.rows[i].cells[j].style.background = `rgb(${r},${g},${b})`;
+          }
+        }
+        table.rows[row].cells[col].style.background =
+          `rgb(${r},${g},${b},0.704)`;
+      }
+
+    </script>
+  </body>
+</html>

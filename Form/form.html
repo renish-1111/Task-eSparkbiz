@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="text-center">Job Application Form</div>
+    <form id="jobForm" onsubmit="">
+      <!-- basic detail -->
+      <div class="container">
+        <div class="heading">Basic Detail</div>
+        <div class="contant flex">
+          <div class="part1">
+            <div>
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" />
+            </div>
+            <div>
+              <label for="designation">Designation</label>
+              <input type="text" id="designation" />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="text" id="email" name="email" />
+            </div>
+            <div>
+              <label for="phone">Phone</label>
+              <input type="text" id="phone" name="phone" />
+            </div>
+            <div>
+              <label for="gender">Gender</label>
+              <input type="radio" id="male" value="male" name="gender" />
+              <label for="male">Male</label>
+              <input type="radio" id="female" value="female" name="gender" />
+              <label for="female">Female</label>
+            </div>
+            <div>
+              <label for="relationshipstatus">Relationship Status</label>
+              <select name="relationshipstatus" id="relationshipstatus">
+                <option value="single">Single</option>
+                <option value="marride">Marride</option>
+                <option value="widowed">Widowed</option>
+                <option value="divorced">Divorced</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="part2">
+            <div>
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" />
+            </div>
+            <div>
+              <label for="address1">Address 1</label>
+              <input type="text" id="address1" name="address1" />
+            </div>
+            <div>
+              <label for="address2">Address 2</label>
+              <input type="text" id="address2" name="address2" />
+            </div>
+            <div>
+              <label for="city">City</label>
+              <input type="text" id="city" class="city" />
+            </div>
+            <div>
+              <label for="state">State</label>
+
+              <select name="state" id="state">
+                <option value="gujarat">Gujarat</option>
+
+                <option value="panjab">Panjab</option>
+
+                <option value="delhi">Delhi</option>
+              </select>
+            </div>
+            <div>
+              <label for="zipcode">Zip Code</label>
+              <input type="text" id="zipcode" class="zipcode" />
+            </div>
+            <div>
+              <label for="bod">Birth of Date</label>
+              <input type="date" id="bod" name="bod" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- education detail -->
+      <div class="container">
+        <div class="heading">Education Detail</div>
+        <div class="contant flex-col">
+          <!-- ssc -->
+          <div>
+            <div>SSC Result</div>
+            <div class="flex">
+              <div>
+
+                <label for="board_ssc">Name of Board</label>
+                <input type="text" id="board_ssc" name="board_ssc" />
+              </div>
+              <div>
+
+                <label for="pass_year_ssc">Passing Year</label>
+                <input type="text" id="pass_year_ssc" name="pass_year_ssc" />
+              </div>
+              <div>
+                <label for="percentage_ssc">Percentage</label>
+                <input type="text" id="percentage_ssc" name="percentage_ssc" />
+              </div>
+            </div>
+          </div>
+          <!-- hsc -->
+          <div>
+            <div>HSC/Diploma Result</div>
+            <div class="flex">
+              <div>
+                <label for="board_hsc_diploma">Name of Board</label>
+                <input
+                  type="text"
+                  id="board_hsc_diploma"
+                  name="board_hsc_diploma"
+                />
+              </div>
+              <div>
+                <label for="pass_year_hsc_diploma">Passing Year</label>
+                <input
+                  type="text"
+                  id="pass_year_hsc_diploma"
+                  name="pass_year_hsc_diploma"
+                />
+              </div>
+              <div>
+                <label for="percentage_hsc_diploma">Percentage</label>
+                <input
+                  type="text"
+                  id="percentage_hsc_diploma"
+                  name="percentage_hsc_diploma"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- bachelor degree -->
+          <div>
+            <div>Bachelor Degree</div>
+            <div class="flex">
+              <div>
+                <label for="course_bachelor">Course Name</label>
+                <input
+                  type="text"
+                  id="course_bachelor"
+                  name="course_bachelor"
+                />
+              </div>
+              <div>
+                <label for="university_bachelor">University</label>
+                <input
+                  type="text"
+                  id="university_bachelor"
+                  name="university_bachelor"
+                />
+              </div>
+              <div>
+                <label for="pass_year_bachelor">Passing Year</label>
+                <input
+                  type="text"
+                  id="pass_year_bachelor"
+                  name="pass_year_bachelor"
+                />
+              </div>
+              <div>
+                <label for="percentage_bachelor">Percentage</label>
+                <input
+                  type="text"
+                  id="percentage_bachelor"
+                  name="percentage_bachelor"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- master degree -->
+          <div>
+            <div>Master Degree</div>
+            <div class="flex">
+              <div>
+                <label for="course_master">Course Name</label>
+                <input type="text" id="course_master" name="course_master" />
+              </div>
+              <div>
+                <label for="university_master">University</label>
+                <input
+                  type="text"
+                  id="university_master"
+                  name="university_master"
+                />
+              </div>
+              <div>
+                <label for="pass_year_master">Passing Year</label>
+                <input
+                  type="text"
+                  id="pass_year_master"
+                  name="pass_year_master"
+                />
+              </div>
+              <div>
+                <label for="percentage_master">Percentage</label>
+                <input
+                  type="text"
+                  id="percentage_master"
+                  name="percentage_master"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- dynamic degree -->
+          <div id="addDegree" class="flex">
+
+          </div>
+          <div>
+            <input type="button" onclick="educationAdd()" value="+" />
+            <button>-</button>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="heading">Work Experience</div>
+        <div class="contant">
+          <div class="flex" id="company">
+            <div>
+              <label for="company_name_1">Comapny Name</label>
+              <input type="text" id="company_name_1" name="company_name_1" />
+            </div>
+            <div>
+              <label for="company_designation_1"> Designation</label>
+              <input
+                type="text"
+                id="company_designation_1"
+                name="company_designation_1"
+              />
+            </div>
+            <div>
+              <label for="company_from_1">From</label>
+              <input type="date" id="company_from_1" name="company_from_1" />
+            </div>
+            <div>
+              <label for="company_to_1">To</label>
+              <input type="date" id="company_to_1" name="company_to_1" />
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <button>+</button>
+            <button>-</button>
+          </div>
+        </div>
+      </div>
+      <div class="flex">
+        <div class="container">
+          <div class="heading">Language Know</div>
+          <div class="contant">
+            <div class="flex flex-col" id="lang">
+              <div>
+                <span>Hindi</span>
+                <input
+                  type="checkbox"
+                  name="hindiread"
+                  id="hindiread"
+                  value="read"
+                />
+                <label for="hindiread">read</label>
+                <input
+                  type="checkbox"
+                  name="hindiwrite"
+                  id="hindiwrite"
+                  value="write"
+                />
+                <label for="hindiwrite">write</label>
+                <input
+                  type="checkbox"
+                  name="hindispeak"
+                  id="hindispeak"
+                  value="speak"
+                />
+                <label for="hindispeak">speak</label>
+              </div>
+              <div>
+                <span>English</span>
+                <input
+                  type="checkbox"
+                  name="englishread"
+                  id="englishread"
+                  value="read"
+                />
+                <label for="englishread">read</label>
+                <input
+                  type="checkbox"
+                  name="englishwrite"
+                  id="englishwrite"
+                  value="write"
+                />
+                <label for="englishwrite">write</label>
+                <input
+                  type="checkbox"
+                  name="englishspeak"
+                  id="englishspeak"
+                  value="speak"
+                />
+                <label for="englishspeak">speak</label>
+              </div>
+              <div>
+                <span>Gujarati</span>
+                <input
+                  type="checkbox"
+                  name="gujaratiread"
+                  id="gujaratiread"
+                  value="read"
+                />
+                <label for="gujaratiread">read</label>
+                <input
+                  type="checkbox"
+                  name="gujaratiwrite"
+                  id="gujaratiwrite"
+                  value="write"
+                />
+                <label for="gujaratiwrite">write</label>
+                <input
+                  type="checkbox"
+                  name="gujaratispeak"
+                  id="gujaratispeak"
+                  value="speak"
+                />
+                <label for="gujaratispeak">speak</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="heading">Technoknlogy Know</div>
+          <div class="contant">
+            <div class="flex flex-col" id="tech">
+              <div>
+                <label for="PHP">PHP</label>
+                <input
+                  type="radio"
+                  name="PHP"
+                  id="PHP_beginer"
+                  value="PHP_beginer"
+                />
+                <label for="PHP_beginer">Beginer</label>
+                <input
+                  type="radio"
+                  name="PHP"
+                  id="PHP_mideator"
+                  value="PHP_mideator"
+                />
+                <label for="PHP_mideator">Mideator</label>
+                <input
+                  type="radio"
+                  name="PHP"
+                  id="PHP_expert"
+                  value="PHP_expert"
+                />
+                <label for="PHP_expert">Expert</label>
+              </div>
+              <div>
+                <label for="MYSQL">MYSQL</label>
+                <input
+                  type="radio"
+                  name="MYSQL"
+                  id="MYSQL_beginer"
+                  value="MYSQL_beginer"
+                />
+                <label for="MYSQL_beginer">Beginer</label>
+                <input
+                  type="radio"
+                  name="MYSQL"
+                  id="MYSQL_mideator"
+                  value="MYSQL_mideator"
+                />
+                <label for="MYSQL_mideator">Mideator</label>
+                <input
+                  type="radio"
+                  name="MYSQL"
+                  id="MYSQL_expert"
+                  value="MYSQL_expert"
+                />
+                <label for="MYSQL_expert">Expert</label>
+              </div>
+              <div>
+                <label for="Laravel">Laravel</label>
+                <input
+                  type="radio"
+                  name="Laravel"
+                  id="Laravel_beginer"
+                  value="Laravel_beginer"
+                />
+                <label for="Laravel_beginer">Beginer</label>
+                <input
+                  type="radio"
+                  name="Laravel"
+                  id="Laravel_mideator"
+                  value="Laravel_mideator"
+                />
+                <label for="Laravel_mideator">Mideator</label>
+                <input
+                  type="radio"
+                  name="Laravel"
+                  id="Laravel_expert"
+                  value="Laravel_expert"
+                />
+                <label for="Laravel_expert">Expert</label>
+              </div>
+              <div>
+                <label for="Oracle">Oracle</label>
+                <input
+                  type="radio"
+                  name="Oracle"
+                  id="Oracle_beginer"
+                  value="Oracle_beginer"
+                />
+                <label for="Oracle_beginer">Beginer</label>
+                <input
+                  type="radio"
+                  name="Oracle"
+                  id="Oracle_mideator"
+                  value="Oracle_mideator"
+                />
+                <label for="Oracle_mideator">Mideator</label>
+                <input
+                  type="radio"
+                  name="Oracle"
+                  id="Oracle_expert"
+                  value="Oracle_expert"
+                />
+                <label for="Oracle_expert">Expert</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="heading">Referance Contact</div>
+        <div class="contant">
+          <div class="flex" id="company">
+            <div>
+              <label for="referance_name_1">Referance Name</label>
+              <input
+                type="text"
+                id="referance_name_1"
+                name="referance_name_1"
+              />
+            </div>
+            <div>
+              <label for="company_contact_1">Referance Contact</label>
+              <input type="text" id="company_contact_1" name="company_name_1" />
+            </div>
+            <div>
+              <label for="company_relation_1">Relation</label>
+              <input
+                type="text"
+                id="company_relation_1"
+                name="company_relation_1"
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <button>+</button>
+            <button>-</button>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="heading">Preferances</div>
+        <div class="contant">
+          <div class="flex" id="company">
+            <div>
+              <label for="preferd_location">Preferd location</label>
+              <textarea name="" id=""></textarea>
+            </div>
+            <div class="flex flex-col">
+              <div>
+                <label for="notice_period">Notice period</label>
+                <input type="text" id="notice_period" name="notice_period" />
+              </div>
+              <div>
+                <label for="expacted_ctc">Expacted CTC</label>
+                <input type="text" id="expacted_ctc" name="expacted_ctc" />
+              </div>
+              <div>
+                <label for="current_ctc">Current CTC</label>
+                <input type="text" id="current_ctc" name="current_ctc" />
+              </div>
+            </div>
+            <div>
+              <label for="company_relation_1">Department</label>
+              <select name="" id="">
+                <option value="design">Design</option>
+                <option value="it">It</option>
+                <option value="hr">Hr</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <script src="script.js"></script>
+  </body>
+</html>

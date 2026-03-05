@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table,td,tr,th{
+        border: 1px solid black;
+        padding: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" name="1" id="no" placeholder="no" />
+    <input type="text" name="2" id="fname" placeholder="fname" />
+    <input type="text" name="3" id="lname" placeholder="lname" />
+    <input type="text" name="4" id="enroll" placeholder="enroll" />
+    <input type="text" name="5" id="phone" placeholder="phone" />
+    <button onclick="addData()" id="btn">Submit</button>
+    
+
+    <table id="add">
+      <tr>
+        <th>no</th>
+        <th>fname</th>
+        <th>lname</th>
+        <th>enrollment</th>
+        <th>phone</th>
+        <th>btn</th>
+      </tr>
+      <tr id="1">
+        <td>1</td>
+        <td>renish</td>
+        <td>ponkiya</td>
+        <td>22020010798</td>
+        <td>9979236771</td>
+        <td><button onClick="remove(1)" id="">Delete</button></td>
+      </tr>
+    </table>
+    <script src="table.js"></script>
+  </body>
+</html>
