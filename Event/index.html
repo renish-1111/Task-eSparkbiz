@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            padding: 20px;
+            border: 2px solid;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>
+                <div id="focus"><input onfocus="runonfocus()" value="onfocus()"></div>
+            </td>
+            <td>
+                <div onclick="runonclick()">onclick()</div>
+            </td>
+            <td>
+                <div ondblclick="runondblclick()">ondblclick()</div>
+            </td>
+            <td>
+                <div><input onblur="runonblur()" value="onblur()"></div>
+            </td>
+            <td>
+                <div><input onchange="runonchange()" value="runonchange()"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="color" onmouseover="runonmouseover()" onmouseout="runonmouseout()">onmouseover()/onmouseout()</div>
+            </td>
+            <td>
+                <div></div>
+            </td>
+            <td>
+                <div onmouseup="runonmouseup()">onmouseup</div>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <script>
+        function runonclick() {
+            alert("onclick is run")
+        };
+        function runondblclick() {
+            alert("ondblclick is run")
+        };
+        function runonblur() {
+            alert("onblur is run")
+        };
+        function runonchange() {
+            alert("onchange is run")
+        };
+        function runonfocus() {
+            document.getElementById("focus").style.backgroundColor = "black";
+            document.getElementById("focus").style.color = "white";
+        };
+        function runonmouseover() {
+            document.getElementById("color").style.backgroundColor = "black";
+        };
+        function runonmouseout() {
+            document.getElementById("color").style.backgroundColor = "white";
+        };
+        function runonmouseup() {
+            alert("runonmouseup() is run")
+        };
+
+    </script>
+</body>
+
+</html>
