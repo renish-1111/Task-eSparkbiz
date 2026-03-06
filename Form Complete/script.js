@@ -5,6 +5,7 @@ let degreeCount = 1
 function educationAdd() {
 
   let html = `
+        <div class="line-bold" id="line_degree_${degreeCount}"></div>
     <div id="degree_${degreeCount}">
             <div>Degree</div>
             <div class="flex">
@@ -117,8 +118,10 @@ function educationRemove() {
   if (degreeCount > 1) {
     degreeCount--
     const degreeElement = document.getElementById(`degree_${degreeCount}`)
+    const degreeLine = document.getElementById(`line_degree_${degreeCount}`)
     if (degreeElement) {
       degreeElement.remove()
+      degreeLine.remove()
     }
   }
 }
@@ -127,6 +130,8 @@ function educationRemove() {
 let experienceCount = 2
 function experienceAdd() {
   let html = `
+        <div class="line-bold" id="line_experience_${experienceCount}"></div>
+
   <div class="flex" id="experience_${experienceCount}">
             <div>
               <label for="company_name_${experienceCount}">Comapny Name</label>
@@ -216,8 +221,10 @@ function experienceRemove() {
   if (experienceCount > 2) {
     experienceCount--
     const experienceElement = document.getElementById(`experience_${experienceCount}`)
+    const experienceLine = document.getElementById(`line_experience_${experienceCount}`)
     if (experienceElement) {
       experienceElement.remove()
+      experienceLine.remove()
     }
   }
 }
@@ -225,6 +232,8 @@ function experienceRemove() {
 let referanceCount = 2
 function referanceAdd() {
   let html = `
+        <div class="line-bold" id="line_referance_${referanceCount}"></div>
+
   <div class="flex" id="referance_${referanceCount}">
           <div>
             <label for="referance_name_${referanceCount}">Referance Name</label>
@@ -297,8 +306,10 @@ function referanceRemove() {
   if (referanceCount > 2) {
     referanceCount--
     const referanceElement = document.getElementById(`referance_${referanceCount}`)
+    const referanceLine = document.getElementById(`line_referance_${referanceCount}`)
     if (referanceElement) {
       referanceElement.remove()
+      referanceLine.remove()
     }
   }
 }
