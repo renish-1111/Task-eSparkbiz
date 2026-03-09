@@ -1,0 +1,134 @@
+<script>
+    document.querySelector("#runonfocus").addEventListener("focus", runonfocus);
+    document.querySelector("#runonclick").addEventListener("click", runonclick);
+    document.querySelector("#runondblclick").addEventListener("dblclick", runondblclick);
+    document.querySelector("#runonblur").addEventListener("blur", runonblur);
+    document.querySelector("#runonchange").addEventListener("change", runonchange);
+
+    document.querySelector("#color").addEventListener("mouseover", runonmouseover);
+    document.querySelector("#color").addEventListener("mouseout", runonmouseout);
+
+    document
+    .querySelector("#mouseenter")
+    .addEventListener("mouseenter", runonmouseenter);
+    document
+    .querySelector("#mouseenter")
+    .addEventListener("mouseleave", runonmouseleave);
+
+    document.querySelector("#mouseup").addEventListener("mousedown", runonmousedown);
+    document.querySelector("#mouseup").addEventListener("mouseup", runonmouseup);
+
+    document
+    .querySelector("#runoncontextmenu")
+    .addEventListener("contextmenu", runoncontextmenu);
+
+    document.querySelector("#mousemove").addEventListener("mousemove", runonmousemove);
+    document.querySelector("#mousemove").addEventListener("mouseout", out);
+
+    document.querySelector("#runonpaste").addEventListener("paste", runonpaste);
+    document.querySelector("#runontoggle").addEventListener("toggle", runontoggle);
+    document.querySelector("#runonsubmit").addEventListener("submit", runonsubmit);
+    document.querySelector("#runoninput").addEventListener("input", runoninput);
+    document.querySelector("#runoncopy").addEventListener("copy", runoncopy);
+
+    document.querySelector("#drag").addEventListener("drag", runondrag);
+    document.querySelector("#rundragover").addEventListener("dragover", rundragover);
+
+    document.querySelector("#runonerror").addEventListener("error", runonerror);
+
+    function runonclick() {
+        alert("onclick is run");
+}
+
+    function runondblclick() {
+        alert("ondblclick is run");
+}
+
+    function runonblur() {
+        alert("onblur is run");
+}
+
+    function runonchange() {
+        alert("onchange is run");
+}
+
+    function runonfocus() {
+        document.getElementById("focus").style.backgroundColor = "black";
+    document.getElementById("focus").style.color = "white";
+}
+
+    function runonmouseover() {
+        document.getElementById("color").style.backgroundColor = "black";
+}
+
+    function runonmouseout() {
+        document.getElementById("color").style.backgroundColor = "white";
+}
+
+    function runonmouseup() {
+        document.getElementById("mouseup").style.backgroundColor = "red";
+}
+
+    function runonmousedown() {
+        document.getElementById("mouseup").style.backgroundColor = "green";
+}
+
+    function runonmouseenter() {
+        document.getElementById("mouseenter").style.backgroundColor = "green";
+}
+
+    function runonmouseleave() {
+        document.getElementById("mouseenter").style.backgroundColor = "red";
+}
+
+    function runoncontextmenu(event) {
+        //   event.preventDefault();
+        alert("runoncontextmenu() is runned");
+}
+
+    function out() {
+        document.getElementById("mousemove").style.backgroundColor = "white";
+    count = 0;
+}
+
+    let count = 0;
+    function runonmousemove() {
+        document.getElementById(
+            "mousemove"
+        ).style.backgroundColor = `rgb(${count++},${count++},${count++})`;
+}
+
+    function runonpaste() {
+        document.getElementById("paste").innerHTML = "copy paste engineer";
+}
+
+    function runontoggle() {
+        alert("toggle work ");
+}
+
+    function runonsubmit() {
+        alert("submit btn click");
+}
+
+    function runoninput() {
+        alert("input entered");
+}
+
+    function runoncopy(event) {
+        event.preventDefault();
+    alert("copy paste engineer");
+}
+
+    function runondrag() {
+        document.getElementById("drag").innerHTML = "muje kau hilaya";
+}
+
+    function runonerror() {
+        document.getElementById("error").innerHTML = "ladale error";
+}
+
+    function rundragover() {
+    }
+
+
+</script>

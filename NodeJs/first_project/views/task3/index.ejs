@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      td {
+        background-color: hsla(122, 100%, 50%, 0.704);
+        border: #000000;
+        padding: 40px;
+      }
+
+      body {
+        height: 100vh;
+      }
+
+      #center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        cursor: pointer;
+      }
+    </style>
+    <title> </title>
+  </head>
+  
+  <body>
+    <button id="start" onclick="start()">start</button>
+    <input type="number" disabled id="score" value="0" />
+    <button id="pause" onclick="pause()" disabled>pause</button>
+    <div id="time"></div>
+    <div id="center">
+      <table id="table">
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+      
+    </div>
+    <script>
+      var table = document.getElementById("table");
+      var row, col;
+      var count = 0;
+      var timer = null;
+      var elapsedTime = 0;
+      var lastResumeTime;
+
+      function start() {
+        document.getElementById("start").disabled = true;
+        document.getElementById("pause").disabled = false;
+
+        lastResumeTime = new Date().getTime();
+        timer = setInterval(() => {
+          let now = new Date().getTime();
+          let totalElapsed =
+            elapsedTime + Math.floor((now - lastResumeTime) / 1000);
+          if (totalElapsed >= 60) {
+            clearInterval(timer);
+            timer = null;
+            alert("Game Over! Your score: " + count);
+            location.reload();
+            count = 0
+            document.getElementById("score").value = 0
+          }
+          document.getElementById("time").innerText = 60 - totalElapsed + "s";
+        }, 1000);
+
+        clickColor();
+      }
+
+      function pause() {
+        if (timer) {
+          let now = new Date().getTime();
+          elapsedTime += Math.floor((now - lastResumeTime) / 1000);
+          clearInterval(timer);
+          timer = null;
+          document.getElementById("start").disabled = false;
+          document.getElementById("pause").disabled = true;
+        }
+      }
+
+      function clickColor() {
+        let r = Math.floor(Math.random() * 256);
+        let g = Math.floor(Math.random() * 256);
+        let b = Math.floor(Math.random() * 256);
+        console.log(`rgb(${r},${g},${b})`);
+
+        var table = document.getElementById("table");
+        for (let i = 0; i < table.rows.length; i++) {
+          for (let j = 0; j < table.rows[i].cells.length; j++) {
+            table.rows[i].cells[j].style.background = `rgb(${r},${g},${b})`;
+            table.rows[i].cells[j].onclick = null;
+          }
+        }
+        row = Math.floor(Math.random() * table.rows.length);
+        col = Math.floor(Math.random() * table.rows[0].cells.length);
+        table.rows[row].cells[col].style.background =
+          `rgba(${r},${g},${b},0.704)`;
+        table.rows[row].cells[col].onclick = () => {
+          expand();
+        };
+      }
+
+      function expand() {
+        count++;
+        document.getElementById("score").value = count;
+        var table = document.getElementById("table");
+
+        var tabw = table.offsetWidth;
+        var tabh = table.offsetHeight;
+
+        if (tabw + 100 < window.innerWidth && tabh + 100 < window.innerHeight) {
+          var numCols = table.rows[0].cells.length;
+
+          for (let i = 0; i < table.rows.length; i++) {
+            table.rows[i].insertCell(-1);
+          }
+
+          var newRow = table.insertRow(-1);
+          for (let i = 0; i < numCols + 1; i++) {
+            newRow.insertCell(-1);
+          }
+
+          clickColor();
+        } else {
+          clickColor();
+        }
+      }
+    </script>
+  </body>
+</html>

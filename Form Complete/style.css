@@ -80,7 +80,6 @@
   display: flex;
   flex-direction: column;
   column-gap: 1px;
-  border: solid 1px black;
 }
 
 .drag-container {

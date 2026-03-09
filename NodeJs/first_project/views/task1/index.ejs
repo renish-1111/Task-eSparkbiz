@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      div {
+      .block {
         padding: 30px 40px;
         border: 2px solid;
         cursor: pointer;
@@ -13,53 +13,53 @@
     </style>
   </head>
 
-  <body>
+  <body> 
     <table>
       <tr>
         <td>
-          <div id="focus">
+          <div class="block" id="focus">
             <input id="runonfocus" value="onfocus()" />
           </div>
         </td>
         <td>
-          <div id="runonclick">onclick()</div>
+          <div class="block" id="runonclick">onclick()</div>
         </td>
         <td>
-          <div id="runondblclick">ondblclick()</div>
+          <div class="block" id="runondblclick">ondblclick()</div>
         </td>
         <td>
-          <div><input id="runonblur" value="onblur()" /></div>
+          <div class="block"><input id="runonblur" value="onblur()" /></div>
         </td>
         <td>
-          <div><input id="runonchange" value="runonchange()" /></div>
+          <div class="block"><input id="runonchange" value="runonchange()" /></div>
         </td>
       </tr>
       <tr>
         <td>
-          <div id="color">
+          <div class="block" id="color">
             onmouseover()/onmouseout()
           </div>
         </td>
         <td>
-          <div id="mouseenter">
+          <div class="block" id="mouseenter">
             onmouseenter()/onmouseleave()
           </div>
         </td>
         <td>
-          <div id="mouseup">
+          <div class="block" id="mouseup">
             onmouseup()/onmousedown()
           </div>
         </td>
-        <td><div id="runoncontextmenu">oncontextmenu()</div></td>
+        <td><div class="block" id="runoncontextmenu">oncontextmenu()</div></td>
         <td>
-          <div id="mousemove">
+          <div class="block" id="mousemove">
             onmousemove()/onmouseout()
           </div>
         </td>
       </tr>
       <tr>
         <td>
-          <div>
+          <div class="block">
             <input
               id="runonpaste"
               placeholder="paste than see runonpaste()"
@@ -68,31 +68,31 @@
           </div>
         </td>
         <td>
-          <div><details id="runontoggle">toggle</details></div>
+          <div class="block"><details id="runontoggle">toggle</details></div>
         </td>
         <td>
-          <div>
+          <div class="block">
             <form id="runonsubmit">
               <input type="submit" value="submit" />
             </form>
           </div>
         </td>
         <td>
-          <div><input id="runoninput" value="input" /></div>
+          <div class="block"><input id="runoninput" value="input" /></div>
         </td>
         <td>
-          <div id="runoncopy">dont copy this</div>
+          <div class="block" id="runoncopy">dont copy this</div>
         </td>
       </tr>
       <tr>
         <td>
-          <div id="drag" draggable="true">drag</div>
+          <div class="block" id="drag" draggable="true">drag</div>
         </td>
         <td id="rundragover">
-          <div id=""></div>
+          <div class="block" id=""></div>
         </td>
         <td>
-          <div>
+          <div class="block">
             <img
               id="runonerror"
               src="sdf.jpg"
@@ -104,6 +104,6 @@
         </td>
       </tr>
     </table>
-    <script src="script.js"></script>
+    <%- include('JS/script') %>
   </body>
 </html>

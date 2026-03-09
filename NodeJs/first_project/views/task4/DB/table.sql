@@ -156,7 +156,6 @@ CREATE TABLE IF NOT EXISTS candidate_referance(
 DROP TABLE IF EXISTS candidate_prefrence;
 CREATE TABLE IF NOT EXISTS candidate_prefrence(
     candidate_id BIGINT UNSIGNED NOT NULL,
-    location VARCHAR(255) NOT NULL,
     department_id INT UNSIGNED NOT NULL,
     notice_period INT UNSIGNED NOT NULL COMMENT "Notice period in days",
     expected_ctc DECIMAL(7) NOT NULL COMMENT "Expected CTC in indian rupees",
@@ -166,6 +165,23 @@ CREATE TABLE IF NOT EXISTS candidate_prefrence(
     CONSTRAINT fk_candidate_prefrence_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_detail(id),
     CONSTRAINT fk_candidate_prefrence_deparments_department_id FOREIGN KEY (department_id) REFERENCES deparments(id)
 );
+
+CREATE TABLE IF NOT EXISTS location_prefrence(
+    id INT UNSIGNED AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    CONSTRAINT pk_location_prefrence_id PRIMARY KEY (id)
+);
+
+DROP TABLE IF EXISTS candidate_location_prefrence;
+CREATE TABLE IF NOT EXISTS candidate_location_prefrence( 
+    location_id INT UNSIGNED NOT NULL,
+    priority INT UNSIGNED NOT NULL,
+    CONSTRAINT pk_candidate_location_prefrence_candidate_id_location_id PRIMARY KEY (candidate_id,location_id),
+    CONSTRAINT fk_candidate_location_prefrence_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_detail(id),
+    CONSTRAINT fk_candidate_location_prefrence_location_prefrence_location_id FOREIGN KEY (location_id) REFERENCES location_prefrence(id),
+    CONSTRAINT chk_candidate_location_prefrence_priority CHECK (priority > 0)
+);
+
 
 
 

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+     
+      #a, #c,#g ,#i{
+        background: #0a4606;
+      }
+      #b, #e,#d ,#f ,#h{
+        background: #cbcbcb;
+      }
+
+      .box{
+        background: #000000f3;
+      }
+
+      #r1,#r2,#r3,#r4{
+        background: red;
+      }
+      #o1,#o2,#o3,#o4{
+        background: orange;
+      }
+      #g1,#g2,#g3,#g4{
+        background: green;
+      }
+
+      #b {
+        border-bottom: none;
+
+      }
+      #d {
+        border-right: none;
+      }
+      #f {
+        border-left: none;
+      }
+      #h {
+        border-top: none;
+      }
+      #e {
+        border-bottom: none;
+        border-right: none;
+        border-left: none;
+        border-top: none;
+      }
+
+      td {
+        border: 2px solid black;
+        padding: 30px;
+      }
+      .circle {
+        padding: 10px;
+        border: 1px solid;
+        border-radius: 70%;
+        margin: 2px;
+      }
+
+      .light-box-v {
+        display: flex;
+      }
+      .light-box-v-r {
+        display: flex;
+        gap : 2px;
+      }
+
+      .box{
+        padding: 3px;
+        border: 2px solid;
+      }
+
+      .text-center{
+        text-align: center;
+        margin: auto;
+        padding: 20px;
+      } 
+      
+    </style>
+  </head>
+  <body>
+    <table id="table">
+      <tr>
+        <td id="a"></td>
+        <td id="b">
+          <div class="text-center" id="t1">0</div>
+          <div class="light-box-v box" >
+            <div class="circle" id="r1"></div>
+            <div class="circle" id="o1"></div>
+            <div class="circle" id="g1"></div>
+          </div>
+        </td>
+        <td id="c"></td>
+      </tr>
+      <tr>
+        <td id="d" class="">
+          <div class="light-box-v-r">
+            <div class="text-center" id="t2">0</div>
+            <div class="box">
+              <div class="circle" id="r2"></div>
+              <div class="circle" id="o2"></div>
+              <div class="circle" id="g2"></div>
+            </div>
+          </div>
+        </td>
+        <td id="e"></td>
+        <td id="f" class="light-box-v">
+          <div class="box">
+            <div class="circle" id="r4"></div>
+            <div class="circle" id="o4"></div>
+            <div class="circle" id="g4"></div>
+          </div>
+          <div class="text-center" id="t4">0</div>
+
+        </td>
+      </tr>
+      <tr>
+        <td id="g"></td>
+        <td id="h" class="">
+          <div class="light-box-v box">
+            <div class="circle" id="r3"></div>
+            <div class="circle" id="o3"></div>
+            <div class="circle" id="g3"></div>
+          </div>
+          <div class="text-center" id="t3">0</div>
+        </td>
+        <td id="i"></td>
+      </tr>
+    </table>
+
+    <br />
+    <button onclick="start()">Start</button>
+
+    <%- include('JS/script') %>    
+  </body>
+</html>
