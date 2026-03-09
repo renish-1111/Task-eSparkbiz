@@ -113,7 +113,7 @@
             </div>
           </div>
 
-          
+
         </div>
         <div class="line-bold"></div>
         <!-- hsc -->
@@ -220,8 +220,8 @@
         </div>
       </div>
       <div class="btn-box">
-          <span class="span-btn" onclick="experienceAdd()">+</span>
-          <span class="span-btn" onclick="experienceRemove()">-</span>
+        <span class="span-btn" onclick="experienceAdd()">+</span>
+        <span class="span-btn" onclick="experienceRemove()">-</span>
       </div>
     </div>
     <div class="flex">
@@ -229,12 +229,12 @@
         <div class="heading">Language Know</div>
         <div class="contant">
           <div class="flex flex-col" id="lang">
-            <div class="grid "> 
+            <div class="grid ">
               <span>Language</span>
               <span>Read</span>
               <span>Write</span>
               <span>Speak</span>
-            </div>  
+            </div>
           </div>
         </div>
       </div>
@@ -242,13 +242,13 @@
         <div class="heading">Technoknlogy Know</div>
         <div class="contant">
           <div class="flex flex-col" id="tech">
-             <div class="grid "> 
+            <div class="grid ">
               <span>Language</span>
               <span>Beginer</span>
               <span>Mideator</span>
               <span>Expert</span>
-            </div>  
-             
+            </div>
+
           </div>
         </div>
       </div>
@@ -286,7 +286,12 @@
         <div class="flex" id="company">
           <div>
             <label for="preferd_location">Preferd location</label>
-            <textarea name="" id="preferd_location"></textarea>
+            
+            <!-- location -->
+            <div id="location" class="row">
+              
+            </div>
+
           </div>
           <div class="flex flex-col">
             <div>
@@ -295,11 +300,11 @@
             </div>
             <div>
               <label for="expacted_ctc">Expacted CTC</label>
-              <input type="text" id="expacted_ctc" name="expacted_ctc" placeholder="360000"/>
+              <input type="text" id="expacted_ctc" name="expacted_ctc" placeholder="360000" />
             </div>
             <div>
               <label for="current_ctc">Current CTC</label>
-              <input type="text" id="current_ctc" name="current_ctc" placeholder="360000"/>
+              <input type="text" id="current_ctc" name="current_ctc" placeholder="360000" />
             </div>
           </div>
           <div>
@@ -314,7 +319,7 @@
       </div>
     </div>
     <div>
-      <input type="submit"  value="Submit">
+      <input type="submit" value="Submit">
       <input type="reset" value="Reset">
     </div>
   </form>
@@ -325,5 +330,7 @@
   <script src="validation.js"></script>
   <script src="language.js"></script>
   <script src="tech.js"></script>
+  <script src="drag.js"></script>
 </body>
+
 </html>
