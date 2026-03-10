@@ -8,7 +8,12 @@ const port = 3000;
 app.set('view engine', 'ejs')
 app.set('views', path.resolve('./views'))
 app.use(expressLayouts);
-console.log();
+
+app.use((req, res, next) => {
+  res.locals.name = "Renish";
+
+  next();
+})
 
 app.get('/', (req, res) => {
   res.render("index.ejs", {
@@ -40,7 +45,7 @@ app.get('/task4', (req, res) => {
     layout: 'base',
     title: 'Task 4 Page'
   })
-  
+
 });
 
 app.listen(port, () => {
