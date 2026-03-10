@@ -15,39 +15,35 @@ app.set("view engine", "ejs")
 
 app.get('/',async (req, res) => {
 
-    let page = parseInt(req.query.page);
+    let page = parseInt(req.query.page) || 1;
 
-    try {
-        const [results, fields] = await connection.query(
-            'SELECT COUNT(id) as count FROM student'
-        );
-
-        let recode = results[0].count; 
-    } catch (err) {
-        console.log(err);
-    }
+   
 
     let onetime = 100
 
     let limit = (page - 1) * onetime 
-    let offset = limit + 100
+    let offset = limit + onetime
+    console.log({"limit":limit,"offset":offset});
 
     try {
-        const [results, fields] = await connection.query(
-            'SELECT id,name,email,phone,address,city,dob,gender FROM student'
+        var [results, fields] = await connection.query(
+            'SELECT COUNT(id) as count FROM student'
+        );
+
+        let recode = results[0].count; 
+
+        var [results, fields] = await connection.query(
+            `SELECT id,name,email,phone,address,city,dob,gender FROM student LIMIT ${limit}, ${onetime}`
         );
         
-        let {id,name,email,phone,address,city,dob,gender} = results[0]; 
-        console.log(name,{"data":results});
+        res.render("index.ejs",{"data":results,"page":page,"total":Math.ceil(recode/onetime)});
         
     } catch (err) {
         console.log(err);
     }
 
-    console.log({"limit":limit,"offset":offset});
     
 
 
-    res.render("index.ejs")
 })
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

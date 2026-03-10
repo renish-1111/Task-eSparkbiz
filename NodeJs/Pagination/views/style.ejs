@@ -19,14 +19,31 @@
   .pagination {
     display: flex;
     gap: 10px;
-    position: absolute;
-    bottom: 10px;
+    position: relative;
     left: 0px;
     right: 0px;
+    top: 10px;
     justify-content: center;
+    margin-bottom: 20px;
   }
 
   .active{
     background-color: rgb(85, 127, 164);
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto ;
+    border: 1px solid black;
+  }
+
+  .data {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .head{
+    text-align: center;
+    font-weight: bold;
   }
 </style>

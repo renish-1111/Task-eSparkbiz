@@ -1,25 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <%- include('style') %>
 </head>
+
 <body>
+    <div class="container">
+        <div class="head">id</div>
+        <div class="head">name</div>
+        <div class="head">email</div>
+        <div class="head">phone</div>
+        <div class="head">address</div>
+        <div class="head">city</div>
+        <div class="head">dob</div>
+        <div class="head">gender</div>
+        <% data.forEach((item)=> { %>
+
+            <div class="data">
+                <% if (item.id) { %>
+                    <%= item.id %>
+                        <% } else { %>
+                            null
+                            <% } %>
+            </div>
+            <div class="data">
+                <% if (item.name) { %>
+                    <%= item.name %>
+                        <% } else { %>
+                            null
+                            <% } %>
+            </div>
+            <div class="data">
+                <% if (item.email) { %>
+                    <%= item.email %>
+                        <% } else { %>
+                            null
+                            <% } %>
+            </div>
+            <div class="data">
+                <% if (item.phone) { %>
+                    <%= item.phone %>
+                        <% } else { %>
+                            null
+                            <% } %>
+            </div>
+            <div class="data">
+                <% if (item.address) { %>
+                    <%= item.address %>
+                        <% } else { %>
+                            null
+                            <% } %>
+            </div>
+            <div class="data">
+                <% if (item.city) { %>
+                    <%= item.city %>
+                        <% } else { %>
+                            null
+                            <% } %>
+            </div>
+            <div class="data">
+                <% if (item.dob) { %>
+                    <%= new Date(item.dob).toLocaleDateString() %>
+                        <% } else { %>
+                            null
+                            <% } %>
+            </div>
+            <div class="data">
+                <% if (item.gender) { %>
+                    male
+                    <% } else { %>
+                        female
+                        <% } %>
+            </div>
+            <% }) %>
+    </div>
     <div class="pagination">
         <div class="pageblock" id="previous"> previous </div>
-        <a href="/?page=1"><div class="pageblock" id="p1">1</div></a>
-        <a href="/?page=2"><div class="pageblock" id="p2">2</div></a>
-        <a href="/?page=3"><div class="pageblock" id="p3">3</div></a>
-        <a href="/?page=4"><div class="pageblock" id="p4">4</div></a>
-        <a href="/?page=5"><div class="pageblock" id="p5">5</div></a>
-        <a href="/?page=6"><div class="pageblock" id="p6">6</div></a>
-        <a href="/?page=7"><div class="pageblock" id="p7">7</div></a>
-        <div class="pageblock" id="next"> next </div>
-        <%= data %>
-        
+        <a href="/?page=1">
+            <div class="pageblock" id="p1">1</div>
+        </a>
+        <div class="data">...</div>
+        <% for(let i=page-4;i<=page+4;i++){ %>
+            <% if (i<total) { %>
+                <% if (i > 1) { %>
+                    <a href="/?page=<%= i %>">
+                        <div class="pageblock" id="p<%= i %>">
+                            <%= i %>
+                        </div>
+                    </a>
+                <% } %>
+            <% } %>
+            <% } %>
+                <div class="data">...</div>
+
+                <a href="/?page=<%= total %>">
+                    <div class="pageblock" id="p<%= total %>">
+                        <%= total %>
+                    </div>
+                </a>
+                <div class="pageblock" id="next"> next </div>
+
     </div>
     <%- include('script') %>
 </body>
+
 </html>
