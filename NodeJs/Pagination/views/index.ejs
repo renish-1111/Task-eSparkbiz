@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('style') %>
+</head>
+<body>
+    <div class="pagination">
+        <div class="pageblock" id="previous"> previous </div>
+        <a href="/?page=1"><div class="pageblock" id="p1">1</div></a>
+        <a href="/?page=2"><div class="pageblock" id="p2">2</div></a>
+        <a href="/?page=3"><div class="pageblock" id="p3">3</div></a>
+        <a href="/?page=4"><div class="pageblock" id="p4">4</div></a>
+        <a href="/?page=5"><div class="pageblock" id="p5">5</div></a>
+        <a href="/?page=6"><div class="pageblock" id="p6">6</div></a>
+        <a href="/?page=7"><div class="pageblock" id="p7">7</div></a>
+        <div class="pageblock" id="next"> next </div>
+        <%= data %>
+        
+    </div>
+    <%- include('script') %>
+</body>
+</html>
