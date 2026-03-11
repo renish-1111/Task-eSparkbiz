@@ -1,42 +1,83 @@
 <script>
-  let pages = document.querySelectorAll(".pageblock");
-
-  console.log(window.location.href);
-
   let url = window.location.href;
-  let page = url.split("page=")[1];
+  const params = new URLSearchParams(url);
+  let page = params.get("http://localhost:3000/?page") || 1;
+  let offset = params.get("offset") || 100;
+  let search = params.get("search") || "";
+  let sorting = params.get("sorting") || "id,asc";
 
-  document.getElementById(`p${page}`).classList.add("active");
+  document.getElementById("idasc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=id,asc&search=${search}`;
+  });
+  document.getElementById("iddesc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=id,desc&search=${search}`;
+  });
+  document.getElementById("nameasc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=name,desc&search=${search}`;
+  });
+  document.getElementById("namedesc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=name,desc&search=${search}`;
+  });
+  document.getElementById("cityasc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=city,desc&search=${search}`;
+  });
+  document.getElementById("citydesc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=city,desc&search=${search}`;
+  });
+  document.getElementById("dobasc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=dob,desc&search=${search}`;
+  });
+  document.getElementById("dobdesc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=dob,desc&search=${search}`;
+  });
+  document.getElementById("search").addEventListener("focusout", (e) => {
+    e.preventDefault();
+    console.log("focusout");
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=${sorting}&search=${e.target.value}`;
+  });
+  let dropdown = document.getElementById("offset");
+  dropdown.addEventListener("change", function (e) {
+    e.preventDefault();
+    document.getElementById("offset").value = e.target.value;
+    window.location.href = `/?page=${page}&offset=${e.target.value}&sorting=${sorting}&search=${search}`;
+  });
+
+  let pages = document.querySelectorAll(".pageblock");
+  for (let i = 1; i <= "<%= total %>"; i++) {
+    let link = document.getElementById(`p${i}`);
+    if (link) {
+      link.href = `/?page=${i}&offset=${offset}&sorting=${sorting}&search=${search}`;
+    }
+  }
+
+  document.getElementById(`block${page}`).classList.add("active");
 
   document.getElementById("next").addEventListener("click", () => {
     url = window.location.href;
     console.log(url);
-    
-    page = parseInt(url.split("page=")[1]) ;
+
+    page = parseInt(url.split("page=")[1]);
     console.log(page);
- 
-    pageElement = document.getElementById(`p${page+1}`)
-    if (pageElement){
-        pageElement.click()
+
+    pageElement = document.getElementById(`p${page + 1}`);
+    if (pageElement) {
+      pageElement.click();
+    } else {
+      console.log("error");
     }
-    else{
-        console.log("error");
-    }
-    
   });
   document.getElementById("previous").addEventListener("click", () => {
     url = window.location.href;
     console.log(url);
-    
-    page = parseInt(url.split("page=")[1]) ;
+
+    page = parseInt(url.split("page=")[1]);
     console.log(page);
-    
-    pageElement = document.getElementById(`p${page-1}`)
-    if (pageElement){
-        pageElement.click()
-    }
-    else{
-        console.log("error");
+
+    pageElement = document.getElementById(`p${page - 1}`);
+    if (pageElement) {
+      pageElement.click();
+    } else {
+      console.log("error");
     }
   });
 </script>
