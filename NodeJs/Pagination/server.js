@@ -12,6 +12,7 @@ const app = express()
 const port = 3000
 
 app.set("view engine", "ejs")
+app.use(express.static("public"))
 
 app.get('/', async (req, res) => {
 
@@ -41,11 +42,15 @@ app.get('/', async (req, res) => {
         var [results, fields] = await connection.query(
             `SELECT id,name,email,phone,address,city,dob,gender FROM student ${searchQuary} LIMIT ?, ?`, [limit, offset]
         );
-
+        
         res.render("index.ejs", { "data": results, "page": page, "total": Math.ceil(recode / offset) });
 
     } catch (err) {
         console.log(err);
     }
 })
+app.get('/404', (req, res) => {
+    res.render("404.ejs")
+})
+   
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

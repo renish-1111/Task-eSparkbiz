@@ -2,6 +2,7 @@
   let url = window.location.search;
   const params = new URLSearchParams(url);
   let page = params.get("page") || 1;
+
   let offset = params.get("offset") || 100;
   let search = params.get("search") || "";
   let sorting = params.get("sorting") || "id,asc";
@@ -18,11 +19,27 @@
     if (currentSearch) {
       document.getElementById("search").value = currentSearch;
     }
+
     if (currentPage) {
-      if(currentPage > "<%= total %>"){
-        window.location.href = `/?page=1&offset=${offset}&sorting=${sorting}&search=${search}`
+      if (parseInt(currentPage) > "<%= total %>") {
+        window.location.href = `/?page=<%= total %>&offset=${offset}&sorting=${sorting}&search=${search}`;
+      }
+      if(currentPage < 1 && "<%= total %>" != 0){
+        window.location.href = `/?page=1&offset=${offset}&sorting=${sorting}&search=${search}`;
+      }
+      if(currentPage < 7 && "<%= total %>" != 0){
+        document.getElementById("dotstart").classList.add("hidden");
+      }
+      if (currentPage > "<%= total %>" - 6) {
+        document.getElementById("dotend").classList.add("hidden");
+      }
+      if ("<%= total%>" == 0){
+        document.getElementById("bar").classList.add("hidden");
+        document.getElementById("error").classList.remove("hidden");
+
       }
     }
+
   });
 
   document.getElementById("idasc").addEventListener("click", () => {

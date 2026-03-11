@@ -17,5 +17,11 @@ CREATE TABLE IF NOT EXISTS student(
     CONSTRAINT pk_student_id PRIMARY KEY (id),
     CONSTRAINT uk_student_email UNIQUE(email),
     CONSTRAINT chk_student_phone CHECK (LENGTH(phone) = 10),
-    CONSTRAINT chk_student_gender CHECK (gender IN (0,1))
+    CONSTRAINT chk_student_gender CHECK (gender IN (0,1)),
+
+    INDEX idx_student_name (name),
+    INDEX idx_student_city (city),
+    INDEX idx_student_dob (dob),
+    INDEX idx_student_created_at (created_at),
+    INDEX idx_wildcard_name (name,phone,dob)
 ) 

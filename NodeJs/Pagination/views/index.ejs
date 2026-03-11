@@ -9,10 +9,9 @@
 </head>
 
 <body>
-    <form action="">
 
-        <div class="mb-10"><label for="search">search</label> <input type="text" id="search"></div>
-        <div><select name="" id="offset">
+    <div class="mb-10"><label for="search">search</label> <input type="text" id="search"></div>
+    <div><select name="" id="offset">
             <option value="10">10</option>
             <option value="50">50</option>
             <option value="100">100</option>
@@ -21,46 +20,45 @@
             <option value="500">500</option>
             <option value="1000">1000</option>
         </select></div>
-    </form>
     <div class="container">
         <div class="head flex gap-5">
             <div>id</div>
             <div class="flex">
-                <div id="idasc">asc</div>
-                <div id="iddesc">dsc</div>
+                <div id="idasc"><img class="img" src="up-arrow.png" alt=""></div>
+                <div id="iddesc"><img class="img flip" src="up-arrow.png" alt=""></div>
             </div>
 
         </div>
         <div class="head flex gap-5">
             <div>name</div>
             <div class="flex">
-                <div id="nameasc">asc</div>
-                <div id="namedesc">dsc</div>
+                <div id="nameasc"><img class="img" src="up-arrow.png" alt=""></div>
+                <div id="namedesc"><img class="img flip" src="up-arrow.png" alt=""></div>
             </div>
         </div>
         <div class="head flex gap-5">
             <div>email</div>
-            
+
         </div>
         <div class="head flex gap-5">
             <div>phone</div>
         </div>
         <div class="head flex gap-5">
             <div>address</div>
-            
+
         </div>
         <div class="head flex gap-5">
             <div>city</div>
             <div class="flex">
-                 <div id="cityasc">asc</div>
-                <div id="citydesc">dsc</div>
+                <div id="cityasc"><img class="img" src="up-arrow.png" alt=""></div>
+                <div id="citydesc"><img class="img flip" src="up-arrow.png" alt=""></div>
             </div>
         </div>
         <div class="head flex gap-5">
             <div>dob</div>
             <div class="flex">
-                 <div id="dobasc">asc</div>
-                <div id="dobdesc">dsc</div>
+                <div id="dobasc"><img class="img" src="up-arrow.png" alt=""></div>
+                <div id="dobdesc"><img class="img flip" src="up-arrow.png" alt=""></div>
             </div>
         </div>
         <div class="head flex gap-5">
@@ -126,31 +124,34 @@
             </div>
             <% }) %>
     </div>
-    <div class="pagination">
+    <div class="hidden" id="error">Not Found</div>
+    <div class="pagination" id="bar">
         <div class="pageblock" id="previous"> previous </div>
         <a href="/?page=1" id="p1">
-            <div  id="block1" class="pageblock" >1</div>
+            <div id="block1" class="pageblock">1</div>
         </a>
-        <div class="data">...</div>
+        <div class="dots" id="dotstart">...</div>
         <% for(let i=page-4;i<=page+4;i++){ %>
             <% if (i<total) { %>
-                <% if (i > 1) { %>
+                <% if (i> 1) { %>
                     <a href="/?page=<%= i %>" id="p<%= i %>">
-                        <div id="block<%= i %>" class="pageblock" > 
+                        <div id="block<%= i %>" class="pageblock">
                             <%= i %>
                         </div>
                     </a>
-                <% } %>
-            <% } %>
-            <% } %>
-                <div class="data">...</div>
+                    <% } %>
+                        <% } %>
+                            <% } %>
+                                <div class="dots" id="dotend">...</div>
+                                <% if (total !=1) { %>
 
-                <a href="/?page=<%= total %>" id="p<%= total %>">
-                    <div  id="block<%= total %>" class="pageblock">
-                        <%= total %>
-                    </div>
-                </a>
-                <div class="pageblock" id="next"> next </div>
+                                    <a href="/?page=<%= total %>" id="p<%= total %>">
+                                        <div id="block<%= total %>" class="pageblock">
+                                            <%= total %>
+                                        </div>
+                                    </a>
+                                    <% } %>
+                                        <div class="pageblock" id="next"> next </div>
 
     </div>
     <%- include('script') %>
