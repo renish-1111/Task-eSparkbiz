@@ -24,16 +24,19 @@ app.get('/', async (req, res) => {
     let limit = (page - 1) * offset
 
     try {
-        var [results, fields] = await connection.query(
-            'SELECT COUNT(id) as count FROM student'
-        );
-        let recode = results[0].count;
+
         let searchQuary = ""
         if (search || sorting) {
             let sortparameter = sorting.split(",")
             searchQuary = `WHERE name LIKE '%${search}%' OR phone LIKE '%${search}%' OR dob LIKE '%${search}%' ORDER BY ${sortparameter[0]} ${sortparameter[1]}`
         }
 
+        var [results, fields] = await connection.query(
+            `SELECT COUNT(*) as count FROM student ${searchQuary}`
+        );
+        
+        let recode = results[0].count;
+        console.log(recode);
 
         var [results, fields] = await connection.query(
             `SELECT id,name,email,phone,address,city,dob,gender FROM student ${searchQuary} LIMIT ?, ?`, [limit, offset]
