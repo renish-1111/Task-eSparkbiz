@@ -21,6 +21,9 @@ app.get('/', async (req, res) => {
     let sorting = req.query.sorting || "id,asc";
     let search = req.query.search || "";
 
+    if (page < 1){
+        page = 1
+    }
 
     let limit = (page - 1) * offset
 

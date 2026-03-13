@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS payments (
     user_id BIGINT UNSIGNED NOT NULL,
     course_id BIGINT UNSIGNED NOT NULL,
     status TINYINT UNSIGNED NOT NULL COMMENT '0=Fail, 1=Success',
-    price DECIMAL(4, 2) UNSIGNED NOT NULL,
+    price DECIMAL(7, 2) UNSIGNED NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT pk_payments_id PRIMARY KEY (id),
@@ -142,6 +142,7 @@ CREATE TABLE IF NOT EXISTS exams (
     instructer_id BIGINT UNSIGNED NOT NULL,
     type TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '0 = Single Ans, 1 = Mulltiple Ans',
     data_of_exam DATE NOT NULL,
+    mark INT NOT NULL
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT pk_exams_id PRIMARY KEY (id),
@@ -150,5 +151,66 @@ CREATE TABLE IF NOT EXISTS exams (
     CONSTRAINT chk_exams_type CHECK (type IN (0, 1))
 );
 
-CREATE 
+DROP TABLE IF EXISTS queations;
+
+CREATE TABLE IF NOT EXISTS queations (
+    id BIGINT UNSIGNED AUTO_INCREMENT,
+    exam_id BIGINT UNSIGNED NOT NULL,
+    que VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT pk_exam_papers_id PRIMARY KEY (id),
+    CONSTRAINT fk_exam_papers_exams_exam_id FOREIGN KEY (exam_id) REFERENCES exams(id)
+);
+DROP TABLE IF EXISTS options;
+CREATE TABLE IF NOT EXISTS options (
+    id BIGINT UNSIGNED AUTO_INCREMENT,
+    exam_paper_id BIGINT UNSIGNED NOT NULL,
+    option_char VARCHAR(1) NOT NULL,
+    option_value VARCHAR(255) NOT NULL,
+    ans TINYINT UNSIGNED NOT NULL COMMENT "0=FALSE , 1=TRUE",
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT pk_options_id PRIMARY KEY (id),
+    CONSTRAINT fk_options_exam_papers_exam_paper_id FOREIGN KEY (exam_paper_id) REFERENCES exam_papers(id),
+    CONSTRAINT chk_options_ans CHECK (ans IN (0,1))
+);
+DROP TABLE IF EXISTS attempts;
+CREATE TABLE IF NOT EXISTS attempts(
+    user_id BIGINT UNSIGNED NOT NULL,
+    qus_id BIGINT UNSIGNED NOT NULL,
+    is_right TINYINT UNSIGNED NOT NULL COMMENT "0=False , 1=True",
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT pk_attempts_user_id_qus_id PRIMARY KEY (user_id,qus_id),
+    CONSTRAINT chk_attempts_is_right CHECK (is_right IN (0,1))
+);
+
+DROP TABLE IF EXISTS results;
+CREATE TABLE IF NOT EXISTS results(
+    id BIGINT UNSIGNED,
+    exam_id BIGINT UNSIGNED NOT NULL,
+    enroll_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    mark INT UNSIGNED NOT NULL,
+    is_passed TINYINT NOT NULL,
+
+    CONSTRAINT pk_results_exam_id_enroll_id_user_id UNIQUE (exam_id,enroll_id,user_id),
+    CONSTRAINT chk_results_marks CHECK (mark > 0),
+    CONSTRAINT chk_results_is_passed CHECK (is_passed IN (0,1))
+);
+
+DROP TABLE IF EXISTS cirtificates;
+CREATE TABLE IF NOT EXISTS cirtificates(
+    id UUID,
+    user_id,
+    enroll_id,
+    coruse_id,
+    
+
+);
+
+
+
 
