@@ -1,12 +1,15 @@
 
 
-let validator = new window.JustValidate("#jobForm")
+window.validator =  new window.JustValidate("#jobForm",{
+    submitFormAutomatically:false,
+    validateBeforeSubmitting:true
+}) 
 
-validator.onSuccess((event)=>{
+window.validator.onSuccess((event) => {
     event.currentTarget.submit();
-});
+})
 
-validator
+window.validator
     .addField("#fname", [
         {
             rule: "required",
@@ -164,7 +167,7 @@ validator
     ])
     .addRequiredGroup("#radio_gender", errorMessage = "Select any option")
 
-validator
+window.validator
     .addField("#board_ssc", [
         {
             rule: "required",
@@ -195,7 +198,7 @@ validator
                 let curr = new Date().getFullYear()
                 let enterValue = value
 
-                if (curr+1 >= enterValue) {
+                if (curr + 1 >= enterValue) {
                     return true
                 }
                 else {
@@ -256,7 +259,7 @@ validator
                 let curr = new Date().getFullYear()
                 let enterValue = value
 
-                if (curr+1 >= enterValue) {
+                if (curr + 1 >= enterValue) {
                     return true
                 }
                 else {
@@ -324,13 +327,13 @@ validator
             errorMessage: "Invalid Year"
         },
         {
-             validator: (value) => {
+            validator: (value) => {
                 let curr = new Date().getFullYear()
                 console.log(curr);
-                
+
                 let enterValue = value
 
-                if (curr+1 >= enterValue) {
+                if (curr + 1 >= enterValue) {
                     return true
                 }
                 else {
@@ -398,11 +401,11 @@ validator
             errorMessage: "Invalid Year"
         },
         {
-           validator: (value) => {
+            validator: (value) => {
                 let curr = new Date().getFullYear()
                 let enterValue = value
 
-                if (curr+1 >= enterValue) {
+                if (curr + 1 >= enterValue) {
                     return true
                 }
                 else {
@@ -434,7 +437,7 @@ validator
         }
     ])
 
-validator
+window.validator
     .addField("#company_name_1", [
         {
             rule: "required",
@@ -472,7 +475,7 @@ validator
         {
             rule: "required",
             errorMessage: "Date is required",
-        }, 
+        },
         {
             validator: (value) => {
                 let curr = new Date()
@@ -491,7 +494,7 @@ validator
     ])
 
 
-validator
+window.validator
     .addField("#referance_name_1", [
         {
             rule: "required",
@@ -534,7 +537,7 @@ validator
             errorMessage: "Don't Insert Number in Relation",
         }
     ])
-validator
+window.validator
     .addField("#preferd_location", [
         {
             rule: "required",
@@ -593,3 +596,11 @@ validator
         },
 
     ])
+
+window.validator.onSuccess((event) => {
+    event.currentTarget.submit();
+})
+window.validator.onFail((fields) => {
+    console.log("Validation failed",fields);
+    
+})

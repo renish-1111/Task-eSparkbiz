@@ -40,7 +40,11 @@
     `;
 
     document.getElementById("addDegree").innerHTML += html;
-    let validator = new window.JustValidate("#jobForm");
+    let validator = new window.JustValidate("#jobForm")
+
+validator.onSuccess((event)=>{
+    event.currentTarget.submit();
+});
     for (let i = 1; i <= degreeCount; i++) {
       validator
         .addField(`#course_degree_${i}`, [
@@ -147,7 +151,11 @@
           </div>
   `;
     document.getElementById("addExperience").innerHTML += html;
-    let validator = new window.JustValidate("#jobForm");
+    let validator = new window.JustValidate("#jobForm")
+
+validator.onSuccess((event)=>{
+    event.currentTarget.submit();
+});
 
     for (let i = 2; i <= experienceCount; i++) {
       validator
@@ -243,7 +251,11 @@
         </div>
   `;
     document.getElementById("AddReferance").innerHTML += html;
-    let validator = new window.JustValidate("#jobForm");
+    let validator = new window.JustValidate("#jobForm")
+
+validator.onSuccess((event)=>{
+    event.currentTarget.submit();
+});
     for (let i = 2; i <= referanceCount; i++) {
       validator
         .addField(`#referance_name_${i}`, [

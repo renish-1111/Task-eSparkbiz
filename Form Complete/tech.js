@@ -18,7 +18,11 @@ for (let i = 0; i < tech.length; i++) {
 }
 for (let i = 0; i < tech.length; i++) {
 
-    let validator = new window.JustValidate("#jobForm");
+    let validator = new window.JustValidate("#jobForm")
+
+validator.onSuccess((event)=>{
+    event.currentTarget.submit();
+});
 
 
     validator

@@ -41,17 +41,12 @@ function educationAdd() {
           </div>
     `
   
-    document.getElementById("addDegree").innerHTML += html
-    let validator = new window.JustValidate("#jobForm")
+    document.getElementById("addDegree").insertAdjacentHTML("beforeend", html)
+    
+    const i = degreeCount
 
-validator.onSuccess((event)=>{
-    event.currentTarget.submit();
-});
-    for (let i = 1; i <= degreeCount; i++) {
-      
-      
-    validator
-        .addField(`#course_degree_${i}`, [
+    window.validator
+      .addField(`#course_degree_${i}`, [
             {
                 rule: "required",
                 errorMessage: "Degree Name is required",
@@ -113,7 +108,6 @@ validator.onSuccess((event)=>{
                 errorMessage: "Not more than 100"
             }
         ])
-    }
 
     degreeCount++
 }
@@ -121,13 +115,17 @@ validator.onSuccess((event)=>{
 function educationRemove() {
   if (degreeCount > 1) {
     degreeCount--
+    window.validator.removeField(`#course_degree_${degreeCount}`)
+    window.validator.removeField(`#university_degree_${degreeCount}`)
+    window.validator.removeField(`#pass_year_degree_${degreeCount}`)
+    window.validator.removeField(`#percentage_degree_${degreeCount}`)
     const degreeElement = document.getElementById(`degree_${degreeCount}`)
     const degreeLine = document.getElementById(`line_degree_${degreeCount}`)
     if (degreeElement) {
       degreeElement.remove()
       degreeLine.remove()
     }
-  }
+}
 }
 
 
@@ -155,15 +153,10 @@ function experienceAdd() {
             </div>
           </div>
   `
-  document.getElementById("addExperience").innerHTML += html
-    let validator = new window.JustValidate("#jobForm")
+  document.getElementById("addExperience").insertAdjacentHTML("beforeend", html)
 
-validator.onSuccess((event)=>{
-    event.currentTarget.submit();
-});
-
-  for (let i = 2; i <= experienceCount; i++) {
-    validator
+  const i = experienceCount
+  window.validator
     .addField(`#company_name_${i}`, [
         {
             rule: "required",
@@ -219,7 +212,6 @@ validator.onSuccess((event)=>{
             errorMessage: "Future date inserted",
         }
     ])
-  }
 
   experienceCount++
 
@@ -228,7 +220,14 @@ validator.onSuccess((event)=>{
 function experienceRemove() {
   if (experienceCount > 2) {
     experienceCount--
+
+    window.validator.removeField(`#company_name_${experienceCount}`)
+    window.validator.removeField(`#company_designation_${experienceCount}`)
+    window.validator.removeField(`#company_from_${experienceCount}`)
+    window.validator.removeField(`#company_to_${experienceCount}`)
+
     const experienceElement = document.getElementById(`experience_${experienceCount}`)
+
     const experienceLine = document.getElementById(`line_experience_${experienceCount}`)
     if (experienceElement) {
       experienceElement.remove()
@@ -257,15 +256,10 @@ function referanceAdd() {
           </div>
         </div>
   `
-  document.getElementById("AddReferance").innerHTML += html
-let validator = new window.JustValidate("#jobForm")
+  document.getElementById("AddReferance").insertAdjacentHTML("beforeend", html)
 
-validator.onSuccess((event)=>{
-    event.currentTarget.submit();
-});
-for (let i = 2; i <= referanceCount; i++) {
-  
-  validator
+const i = referanceCount
+  window.validator
     .addField(`#referance_name_${i}`, [
         {
             rule: "required",
@@ -308,7 +302,6 @@ for (let i = 2; i <= referanceCount; i++) {
             errorMessage: "Don't Insert Number in Relation",
         }
     ])
-}
     
 
   referanceCount++
@@ -317,6 +310,11 @@ for (let i = 2; i <= referanceCount; i++) {
 function referanceRemove() {
   if (referanceCount > 2) {
     referanceCount--
+
+    window.validator.removeField(`#referance_name_${referanceCount}`)
+    window.validator.removeField(`#company_contact_${referanceCount}`)
+    window.validator.removeField(`#company_relation_${referanceCount}`)
+    
     const referanceElement = document.getElementById(`referance_${referanceCount}`)
     const referanceLine = document.getElementById(`line_referance_${referanceCount}`)
     if (referanceElement) {

@@ -1,0 +1,7 @@
+import { z } from zod;
+
+const noNumbersSchema = z.string().regex(/^[^0-9]*$/,{message:"Field must not have number"}).nonempty();
+const stringSchema = z.string().nonempty();
+const emailSchema = z.email().nonempty();
+const phoneSchema = z.string().regex(/^[0-9]+/).size(10);
+

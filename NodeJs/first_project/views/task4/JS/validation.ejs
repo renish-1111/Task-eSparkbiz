@@ -1,7 +1,11 @@
 <script>
 
 
-let validator = new window.JustValidate("#jobForm");
+let validator = new window.JustValidate("#jobForm")
+
+validator.onSuccess((event)=>{
+    event.currentTarget.submit();
+});
 
 validator
     .addField("#fname", [

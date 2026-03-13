@@ -1,7 +1,6 @@
-<script>
-  let tech = ["PHP", "MYSQL", "Laravel", "Oracle"];
+let tech = ["PHP", "MYSQL", "Laravel", "Oracle"]
 
-  for (let i = 0; i < tech.length; i++) {
+for (let i = 0; i < tech.length; i++) {
     let html = `
             <div class="grid flex" id="${tech[i]}">
               <span>${tech[i]}</span>
@@ -12,23 +11,20 @@
             </div>
             <div id="${tech[i]}_error">
             </div>
-  `;
+  `
 
-    document.getElementById("tech").innerHTML += html;
-  }
-  for (let i = 0; i < tech.length; i++) {
-    let validator = new window.JustValidate("#jobForm")
+    document.getElementById("tech").innerHTML += html
 
-validator.onSuccess((event)=>{
-    event.currentTarget.submit();
-});
+}
+if (window.validator) {
+    for (let i = 0; i < tech.length; i++) {
+        window.validator.addRequiredGroup(`#${tech[i]}`, "Select option", [
+            {
+                tooltip: {
+                    position: '',
+                },
+            }
+        ])
+    }
+}
 
-    validator.addRequiredGroup(`#${tech[i]}`, "Select option", [
-      {
-        tooltip: {
-          position: "",
-        },
-      },
-    ]);
-  }
-</script>
