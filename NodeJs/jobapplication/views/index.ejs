@@ -20,7 +20,7 @@
             </div>
             <div>
               <label for="designation">Designation</label>
-              <input fname="designation" type="text" id="designation" />
+              <input fname="designation" type="text" id="designation" name="designation" />
             </div>
             <div>
               <label for="email">Email</label>
@@ -40,10 +40,13 @@
             <div>
               <label for="relationshipstatus">Relationship Status</label>
               <select name="relationshipstatus" id="relationshipstatus">
-                <option value="single">Single</option>
-                <option value="marride">Marride</option>
-                <option value="widowed">Widowed</option>
-                <option value="divorced">Divorced</option>
+                
+
+                <% relationshipstatus.forEach(relation => { %>
+                 <option value="<%= relation.id%>"><%= relation.name%></option>
+
+                <% }) %>
+
               </select>
             </div>
           </div>
@@ -276,6 +279,15 @@
                 <span>Write</span>
                 <span>Speak</span>
               </div>
+              <% for ( let i = 0; i < languages.length; i++ ) { %>
+              <div class="grid" id="<%= languages[i].name %>">
+                <span><%=languages[i].name%></span>
+                <input type="checkbox" name="language_<%=languages[i].id%>_read" id="language_<%=languages[i].id%>_read" value="1" />
+                <input type="checkbox" name="language_<%=languages[i].id%>_write" id="language_<%=languages[i].id%>_write" value="1" />
+                <input type="checkbox" name="language_<%=languages[i].id%>_speak" id="language_<%=languages[i].id%>_speak" value="1" />
+              </div>
+              <% } %>
+              
             </div>
           </div>
         </div>
@@ -289,6 +301,14 @@
                 <span>Mideator</span>
                 <span>Expert</span>
               </div>
+              <% for( let i = 0; i < technologies.length; i++ ) { %>
+              <div class="grid flex" id="<%=technologies[i].name%>">
+              <span><%=technologies[i].name%></span>
+              <input type="radio" name="technology_<%=technologies[i].id%>" id="technology_<%=technologies[i].id%>_beginer" value="1" onclick="if(this.wasChecked) { this.checked = false; this.wasChecked = false; } else { this.wasChecked = true; }" />
+              <input type="radio" name="technology_<%=technologies[i].id%>" id="technology_<%=technologies[i].id%>_mideator" value="2" onclick="if(this.wasChecked) { this.checked = false; this.wasChecked = false; } else { this.wasChecked = true; }" />
+              <input type="radio" name="technology_<%=technologies[i].id%>" id="technology_<%=technologies[i].id%>_expert" value="3" onclick="if(this.wasChecked) { this.checked = false; this.wasChecked = false; } else { this.wasChecked = true; }" />
+            </div>
+              <% } %>
             </div>
           </div>
         </div>
@@ -306,15 +326,15 @@
               />
             </div>
             <div>
-              <label for="company_contact_1">Referance Contact</label>
-              <input type="text" id="company_contact_1" name="company_name_1" />
+              <label for="referance_contact_1">Referance Contact</label>
+              <input type="text" id="referance_contact_1" name="referance_contact_1" />
             </div>
             <div>
-              <label for="company_relation_1">Relation</label>
+              <label for="referance_relation_1">Relation</label>
               <input
                 type="text"
-                id="company_relation_1"
-                name="company_relation_1"
+                id="referance_relation_1"
+                name="referance_relation_1"
               />
             </div>
           </div>
@@ -333,7 +353,7 @@
           <div class="flex" id="company">
             <div>
               <label for="preferd_location">Preferd location</label>
-              <textarea name="" id="preferd_location"></textarea>
+              <textarea name="preferd_location" id="preferd_location"></textarea>
             </div>
             <div class="flex flex-col">
               <div>
@@ -361,17 +381,20 @@
             </div>
             <div>
               <label for="department">Department</label>
-              <select name="" id="department">
-                <option value="design">Design</option>
-                <option value="it">It</option>
-                <option value="hr">Hr</option>
+              <select name="department" id="department">
+                
+
+                <% deparments.forEach(deparment => { %>
+                <option value="<%= deparment.id %>"><%= deparment.name %></option>
+                  
+                <% }) %>
               </select>
             </div>
           </div>
         </div>
       </div>
       <div>
-        <button type="submit">submit</button>
+        <input type="submit" value="submit">
         <input type="reset" value="Reset" />
       </div>
     </form>

@@ -63,13 +63,8 @@ window.validator
             errorMessage: "Relationship status is required",
         },
         {
-            validator: (value, fields) => {
-                let validOptions = ["single", "marride", "widowed", "divorced"];
-                return validOptions.includes(value);
-            },
-            errorMessage: "Relationship status invalid",
-
-        },
+            rule:"number",
+        }
     ])
     .addField("#lname", [
         {
@@ -152,7 +147,8 @@ window.validator
                 let curr = new Date()
                 let bod = new Date(value);
                 let age = (curr - bod) / (1000 * 60 * 60 * 364 * 24)
-
+                console.log(age);
+                
                 if (age >= 18) {
 
                     return true
@@ -466,6 +462,7 @@ window.validator
                 else {
                     return false
                 }
+                
 
             },
             errorMessage: "Future date inserted",
