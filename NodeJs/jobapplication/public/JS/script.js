@@ -248,11 +248,11 @@ function referanceAdd() {
           </div>
           <div>
             <label for="company_contact_${referanceCount}">Referance Contact</label>
-            <input type="text" id="company_contact_${referanceCount}" name="company_contact[]" />
+            <input type="text" id="company_contact_${referanceCount}" name="referance_contact[]" />
           </div>
           <div>
             <label for="company_relation_${referanceCount}">Relation</label>
-            <input type="text" id="company_relation_${referanceCount}" name="company_relation[]" />
+            <input type="text" id="company_relation_${referanceCount}" name="referance_relation[]" />
           </div>
         </div>
         <div class="line-bold" id="line_referance_${referanceCount}"></div>

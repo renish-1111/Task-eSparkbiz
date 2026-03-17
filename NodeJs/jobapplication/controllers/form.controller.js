@@ -60,17 +60,61 @@ class FormController {
             for (let i = 0; i < degree_name.length; i++) {
                 educations.push(
                     {
-                        degree_name:degree_name[i], 
+                        degree_name: degree_name[i],
                         university: university[i],
                         passing_year: passing_year[i],
                         percentage: percentage[i]
                     }
                 )
             }
+            
+            let languages_row = req.body.languages;
+            let languages = []
+            Object.keys(languages_row).map(function (key) {
+                console.log(key);
+                languages.push({
+                    id:Number(key.replace("'","").replace("'","")),
+                    read:Number(languages_row[key].read) || 0,
+                    write:Number(languages_row[key].write) || 0,
+                    speak:Number(languages_row[key].speak) || 0,
+                })
+            });  
+            
+            let technologies_row = req.body.technologies
+            let technologies = []
+            Object.keys(technologies_row).map(function (key) {
+                console.log(key);
+                technologies.push({
+                    id:Number(key.replace("'","").replace("'","")),
+                    level:Number(technologies_row[key]),    
+                })
+            });
+            
+            const referance_name = req.body.referance_name;
+            const referance_contact = req.body.referance_contact;
+            const referance_relation = req.body.referance_relation;
 
-            console.log(educations);
-
-            const [basicdetailId, addressId, educationIds] = await formService.submitForm(basicdetail, address, educations)
+            let referances = [];
+            for (let i = 0; i < degree_name.length; i++) {
+                referances.push(
+                    {
+                        referance_name: referance_name[i],
+                        referance_contact: referance_contact[i],
+                        referance_relation: referance_relation[i],
+                    }
+                )
+            }
+            
+            const prefrence = {
+                preferd_location:req.body.preferd_location,
+                department:req.body.department,
+                notice_period:req.body.notice_period,
+                expacted_ctc:req.body.expacted_ctc,
+                current_ctc:req.body.current_ctc,
+            }
+            console.log(prefrence);
+            
+            const [basicdetailId, addressId, educationIds, languageIds, technologyIds, referanceIds, prefrenceId] = await formService.submitForm(basicdetail, address, educations, languages, technologies, referances, prefrence)
             console.log([basicdetailId, addressId, educationIds]);
 
             res.send("Form submitted successfully");
