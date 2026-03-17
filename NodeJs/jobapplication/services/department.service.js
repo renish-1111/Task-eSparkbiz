@@ -1,5 +1,5 @@
 const pool = require("../db/db.config")
-const DepartmentRepository = require("../repositories/department.repository")
+const DepartmentRepository = require("../repositories/index_page/department.repository")
 
 const departmentRepository = new DepartmentRepository(pool)
 

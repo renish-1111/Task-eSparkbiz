@@ -1,5 +1,5 @@
 const pool = require("../db/db.config")
-const TechnologyRepository = require("../repositories/technology.repository")
+const TechnologyRepository = require("../repositories/index_page/technology.repository")
 
 const technologyRepository = new TechnologyRepository(pool)
 

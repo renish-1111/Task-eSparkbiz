@@ -7,6 +7,7 @@ const formController = require("../controllers/form.controller")
 
 // Add routes
 router.get('/', formController.showForm);
+router.get('/view', formController.showEntry);
 router.post('/form', formController.submitForm);
 
 

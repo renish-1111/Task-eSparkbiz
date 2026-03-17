@@ -1,5 +1,5 @@
 const pool = require("../db/db.config")
-const RelationshipStatusRepository = require("../repositories/relationshipstatus.repository")
+const RelationshipStatusRepository = require("../repositories/index_page/relationshipstatus.repository")
 
 const relationshipStatusRepository = new RelationshipStatusRepository(pool)
 

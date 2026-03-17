@@ -2,7 +2,8 @@ const languageService = require("../services/language.service")
 const technologyService = require("../services/technology.service")
 const relationshipStatusService = require("../services/relationshipstatus.service")
 const departmentService = require("../services/department.service")
-const formService = require("../services/form.service")
+const formService = require("../services/form.service");
+const basicdetailpreviewService = require("../services/basicdetailpreview.service")
 const connection = require("../db/db.config")
 
 class FormController {
@@ -24,6 +25,18 @@ class FormController {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    async showEntry(req, res, next) {
+
+        const basicdetailpreview = await basicdetailpreviewService.showDetail();
+        console.log(basicdetailpreview);
+        
+        res.render("view", {
+                layout: 'base',
+                title: 'View Page',
+                basicdetailpreview: basicdetailpreview,
+            });
     }
 
     async submitForm(req, res, next) {
@@ -67,29 +80,29 @@ class FormController {
                     }
                 )
             }
-            
+
             let languages_row = req.body.languages;
             let languages = []
             Object.keys(languages_row).map(function (key) {
                 console.log(key);
                 languages.push({
-                    id:Number(key.replace("'","").replace("'","")),
-                    read:Number(languages_row[key].read) || 0,
-                    write:Number(languages_row[key].write) || 0,
-                    speak:Number(languages_row[key].speak) || 0,
+                    id: Number(key.replace("'", "").replace("'", "")),
+                    read: Number(languages_row[key].read) || 0,
+                    write: Number(languages_row[key].write) || 0,
+                    speak: Number(languages_row[key].speak) || 0,
                 })
-            });  
-            
+            });
+
             let technologies_row = req.body.technologies
             let technologies = []
             Object.keys(technologies_row).map(function (key) {
                 console.log(key);
                 technologies.push({
-                    id:Number(key.replace("'","").replace("'","")),
-                    level:Number(technologies_row[key]),    
+                    id: Number(key.replace("'", "").replace("'", "")),
+                    level: Number(technologies_row[key]),
                 })
             });
-            
+
             const referance_name = req.body.referance_name;
             const referance_contact = req.body.referance_contact;
             const referance_relation = req.body.referance_relation;
@@ -104,20 +117,19 @@ class FormController {
                     }
                 )
             }
-            
+
             const prefrence = {
-                preferd_location:req.body.preferd_location,
-                department:req.body.department,
-                notice_period:req.body.notice_period,
-                expacted_ctc:req.body.expacted_ctc,
-                current_ctc:req.body.current_ctc,
+                preferd_location: req.body.preferd_location,
+                department: req.body.department,
+                notice_period: req.body.notice_period,
+                expacted_ctc: req.body.expacted_ctc,
+                current_ctc: req.body.current_ctc,
             }
             console.log(prefrence);
-            
-            const [basicdetailId, addressId, educationIds, languageIds, technologyIds, referanceIds, prefrenceId] = await formService.submitForm(basicdetail, address, educations, languages, technologies, referances, prefrence)
-            console.log([basicdetailId, addressId, educationIds]);
 
-            res.send("Form submitted successfully");
+            const [basicdetailId, addressId, educationIds, languageIds, technologyIds, referanceIds, prefrenceId] = await formService.submitForm(basicdetail, address, educations, languages, technologies, referances, prefrence)
+
+            res.redirect('/view', { message: "Form Submite Successfully!" });
         } catch (error) {
             console.log(error);
             res.status(500).send("An error occurred while submitting the form");

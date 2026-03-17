@@ -1,10 +1,10 @@
-const BasicdetailRepository = require('../repositories/basicdetail.repository');
-const AddressRepository = require("../repositories/address.repository")
-const EducaitonRepository  =require("../repositories/education.repository")
-const CandidateLanguagesRepository  =require("../repositories/candidatelanguages.repository")
-const CandidateTechnologyRepository  =require("../repositories/candidatetechnology.repository")
-const CandidateReferanceRepository  =require("../repositories/candidatereferance.repository")
-const CandidatePrefrenceRepository = require("../repositories/candidateprefrence.repository")
+const BasicdetailRepository = require('../repositories/from/basicdetail.repository');
+const AddressRepository = require("../repositories/from/address.repository")
+const EducaitonRepository  =require("../repositories/index_page/education.repository")
+const CandidateLanguagesRepository  =require("../repositories/from/candidatelanguages.repository")
+const CandidateTechnologyRepository  =require("../repositories/from/candidatetechnology.repository")
+const CandidateReferanceRepository  =require("../repositories/from/candidatereferance.repository")
+const CandidatePrefrenceRepository = require("../repositories/from/candidateprefrence.repository")
 const pool = require("../db/db.config")
 
 class FormService {

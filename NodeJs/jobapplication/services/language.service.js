@@ -1,5 +1,5 @@
 const pool = require("../db/db.config")
-const LanguageRepository = require("../repositories/language.repository")
+const LanguageRepository = require("../repositories/index_page/language.repository")
 
 const languageRepository = new LanguageRepository(pool)
 

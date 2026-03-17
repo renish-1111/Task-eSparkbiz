@@ -1,4 +1,4 @@
-const pool = require("../db/db.config");
+const pool = require("../../db/db.config");
 
 class AddressRepository{
     constructor(db){
