@@ -16,7 +16,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json())
 
 app.use((req, res, next) => {
-    console.log("some");
+    const url = req.url;
+    const method = req.method;
+    const currentTime = new Date()
+
+    console.log(`\nLog : ${method} ${url} - ${currentTime}`);
+
     next()
 })
 

@@ -96,7 +96,8 @@ CREATE TABLE IF NOT EXISTS addresses (
     city VARCHAR(100) NOT NULL,
     zipcode VARCHAR(6) NOT NULL,
     CONSTRAINT pk_addresses_candidate_id PRIMARY KEY (candidate_id),
-    CONSTRAINT fk_addresses_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id)
+    CONSTRAINT fk_addresses_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id),
+    CONSTRAINT chk_addresses_zipcode CHECK (LENGTH(zipcode) = 6)
 );
 
 DROP TABLE IF EXISTS educations;
