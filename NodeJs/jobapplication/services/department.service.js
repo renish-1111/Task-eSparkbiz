@@ -1,4 +1,7 @@
-const departmentRepository = require("../repositories/department.repository")
+const pool = require("../db/db.config")
+const DepartmentRepository = require("../repositories/department.repository")
+
+const departmentRepository = new DepartmentRepository(pool)
 
 class DepartmentService {
     async showAllDepartent() {

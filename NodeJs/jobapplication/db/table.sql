@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS relationship_status (
     CONSTRAINT pk_relationship_status_id PRIMARY KEY (id)
 );
 
-insert into
+INSERT INTO
     relationship_status (id, name)
 values (1, 'SINGLE'),
     (2, 'MARRIED'),

@@ -1,11 +1,15 @@
-const connection = require("../db/db.config")
 
 class DeparmentRepository {
+
+    constructor(db){
+        this.db = db;
+    }
+
     async findAll(){
         const sql = "SELECT id, name FROM deparments;"
-        const result = await connection.execute(sql);
+        const result = await this.db.execute(sql);
         return result[0]
     }
 }
 
-module.exports = new DeparmentRepository()
+module.exports = DeparmentRepository;

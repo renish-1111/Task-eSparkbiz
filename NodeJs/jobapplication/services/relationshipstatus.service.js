@@ -1,9 +1,10 @@
-const relationshipStatusRepository = require("../repositories/relationshipstatus.repository")
+const pool = require("../db/db.config")
+const RelationshipStatusRepository = require("../repositories/relationshipstatus.repository")
+
+const relationshipStatusRepository = new RelationshipStatusRepository(pool)
 
 class RelationshipStatusService {
-
-    async showAllrelationshipstatus() {
-        
+    async showAllRelationshipStatus() {
         try {
             const relationshipstatus = await relationshipStatusRepository.findAll();
             return relationshipstatus;

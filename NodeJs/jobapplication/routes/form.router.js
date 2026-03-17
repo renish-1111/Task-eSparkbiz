@@ -7,10 +7,7 @@ const formController = require("../controllers/form.controller")
 
 // Add routes
 router.get('/', formController.showForm);
-router.post('/form', (req,res) => {
-    console.log(req.body);
-    res.send("ok")
-})
+router.post('/form', formController.submitForm);
 
 
 module.exports = router;

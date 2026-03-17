@@ -29,11 +29,7 @@ app.use((req, res, next) => {
 
 app.use("/",formRouter)
 
-app.post("/form", (req, res) => {
-    console.log(req.body.language);
 
-    res.send("perfect")
-})
 
 app.listen(3000, () => {
     console.log("Server running on port 3000");
