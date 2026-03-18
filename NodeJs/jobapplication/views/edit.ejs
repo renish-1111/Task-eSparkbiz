@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="CSS/style.css" />
+</head>
+
+<body>
+  <div class="text-center">Job Application Form</div>
+  <form id="jobForm" action="/edit/<%= formdata.basicdetail[0].id  %>" method="PATCH" onsubmit="console.log('sad')">
+    <!-- basic detail -->
+    <div class="container">
+      <div class="heading">Basic Detail</div>
+      <div class="contant flex">
+        <div class="part1">
+          <div>
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" value="<%= formdata.basicdetail[0].fname %>"/>
+          </div>
+          <div>
+            <label for="designation">Designation</label>
+            <input type="text" id="designation" name="designation" value="<%= formdata.basicdetail[0].designation %>" />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" value="<%= formdata.basicdetail[0].email %>"/>
+          </div>
+          <div>
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" inputmode="numeric" name="phone" value="<%= formdata.basicdetail[0].phone %>" />
+          </div>
+          <div id="radio_gender">
+            <label>Gender</label>
+            <input type="radio" id="male" value="1" name="gender" <% if (formdata.basicdetail[0].gender == 1) { %>
+             checked
+            <% } %>  />
+            <label for="male">Male</label>
+            <input type="radio" id="female" value="0" name="gender" <% if (formdata.basicdetail[0].gender == 0) { %>
+             checked
+            <% } %> />
+            <label for="female">Female</label>
+          </div>
+          <div>
+            <label for="relationshipstatus">Relationship Status</label>
+            <select name="relationshipstatus" id="relationshipstatus" value="<%= formdata.basicdetail[0].relationship_status_name %>">
+
+
+              <% relationshipstatus.forEach(relation=> { %>
+                <option value="<%= relation.id%>">
+                  <%= relation.name%>
+                </option>
+
+                <% }) %>
+
+            </select>
+          </div>
+        </div>
+
+        <div class="part2">
+          <div>
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" value="<%= formdata.basicdetail[0].lname %>"/>
+          </div>
+          <div>
+            <label for="address1">Address 1</label>
+            <input type="text" id="address1" name="address1" value="<%= formdata.address[0].address1 %>" />
+          </div>
+          <div>
+            <label for="address2">Address 2</label>
+            <input type="text" id="address2" name="address2" value="<%= formdata.address[0].address2 %>"/>
+          </div>
+          <div>
+            <label for="city">City</label>
+            <input type="text" id="city" class="city" name="city" value="<%= formdata.address[0].city %>"/>
+          </div>
+          <div>
+            <label for="state">State</label>
+            <select name="state" id="state" value="<%= formdata.address[0].state %>">
+              <option value="gujarat">Gujarat</option>
+
+              <option value="panjab">Panjab</option>
+
+              <option value="delhi">Delhi</option>
+            </select>
+          </div>
+          <div>
+            <label for="zipcode">Zip Code</label>
+            <input type="text" id="zipcode" name="zipcode" inputmode="numeric" class="zipcode" value="<%= formdata.address[0].zipcode %>"/>
+          </div>
+          <div>
+            <label for="bod">Date of Birth</label>
+            <input type="text" id="bod" name="bod" value="<%= formdata.basicdetail[0].bod %>" placeholder="01/01/2000" />
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- education detail -->
+    <div class="container">
+      <div class="heading">Education Detail</div>
+      <div class="contant flex-col" id="education">
+        <!-- ssc -->
+        <% window.degreeCount = formdata.educaitons.length + 1 %>
+
+        <!-- dynamic degree -->
+        
+        <div id="addDegree" class="flex-col flex">
+            <% for( let i = 1; i <= formdata.educaitons.length; i++ ) { %>
+            
+
+                <div id="degree_<%= i%>">
+            <div>Degree</div>
+            <div class="flex">
+              <div>
+                <label for="course_degree_<%= i%>">Course Name</label>
+                <input type="text" id="course_degree_<%= i%>" name="course_name[]" value="<%= formdata.educaitons[i-1].degree_name %>"/>
+              </div>
+              <div>
+                <label for="university_degree_<%= i%>">University</label>
+                <input
+                  type="text"
+                  id="university_degree_<%= i%>"
+                  name="university[]"
+                  value="<%= formdata.educaitons[i-1].university %>"
+                />
+              </div>
+              <div>
+                <label for="pass_year_degree_<%= i%>">Passing Year</label>
+                <input
+                  type="text"
+                  id="pass_year_degree_<%= i%>"
+                  name="course_pass[]"
+                  value="<%= formdata.educaitons[i-1].passing_year %>"
+                />
+              </div>
+              <div>
+                <label for="percentage_degree_<%= i%>">Percentage</label>
+                <input
+                  type="text"
+                  id="percentage_degree_<%= i%>"
+                  name="course_percentage[]"
+                  value="<%= formdata.educaitons[i-1].percentage %>"
+                />
+              </div>
+            </div>
+          </div>
+        <div class="line-bold" id="line_degree_<%= i%>"></div>
+
+
+
+            <% } %>
+            
+            <div class="line-bold" ></div>
+        </div>
+        <div>
+          <span class="span-btn" onclick="educationAdd()">+</span>
+          <span class="span-btn" onclick="educationRemove()">-</span>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="heading">Work Experience</div>
+      <% window.experienceCount = formdata.experiences.length + 1 %>
+      <div class="contant flex-col">
+                  <div class="line-bold"></div>
+                  <% for( let i = 0; i < array.length; i++ ) { %>
+                  
+
+                    <div class="flex" id="experience_<%= i %>">
+            <div>
+              <label for="company_name_<%= i %>">Comapny Name</label>
+              <input type="text" id="company_name_<%= i %>" name="company_name[]" value="<%= formdata.experiences[i+1].company_name%>" />
+            </div>
+            <div>
+              <label for="company_designation_<%= i %>"> Designation</label>
+              <input type="text" id="company_designation_<%= i %>" name="company_designation[]" value="<%= formdata.experiences[i+1].designation %>" />
+            </div>
+            <div>
+              <label for="company_from_<%= i %>">From</label>
+              <input type="date" id="company_from_<%= i %>" name="company_from[]" value="<%= formdata.experiences[i+1].from_date %>"/>
+            </div>
+            <div>
+              <label for="company_to_<%= i %>">To</label>
+              <input type="date" id="company_to_<%= i %>" name="company_to[]" value="<%= formdata.experiences[i+1].to_date%>"/>
+            </div>
+          </div>
+        <div class="line-bold" id="line_experience_<%= i %>"></div>
+
+
+
+                  <% } %>
+
+        <div class="flex-col flex" id="addExperience"></div>
+      </div>
+      <div class="btn-box">
+        <span class="span-btn" onclick="experienceAdd()">+</span>
+        <span class="span-btn" onclick="experienceRemove()">-</span>
+      </div>
+    </div>
+    <div class="flex">
+      <div class="container">
+        <div class="heading">Languages Known</div>
+        <div class="contant">
+          <div class="flex flex-col" id="lang">
+            <div class="grid">
+              <span>Language</span>
+              <span>Read</span>
+              <span>Write</span>
+              <span>Speak</span>
+            </div>
+            <% for ( let i=0; i < languages.length; i++ ) { %>
+              <div class="grid" id="<%= languages[i].name %>">
+                <span>
+                  <%=languages[i].name%>
+                </span>
+                <input type="checkbox" name="languages['<%=languages[i].id%>'][read]"
+                  id="language_<%=languages[i].id%>_read" value="1" />
+                <input type="checkbox" name="languages['<%=languages[i].id%>'][write]"
+                  id="language_<%=languages[i].id%>_write" value="1" />
+                <input type="checkbox" name="languages['<%=languages[i].id%>'][speak]"
+                  id="language_<%=languages[i].id%>_speak" value="1" />
+              </div>
+              <% } %>
+
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="heading">Technologies Known</div>
+        <div class="contant">
+          <div class="flex flex-col" id="tech">
+            <div class="grid">
+              <span>Technology</span>
+              <span>Beginner</span>
+              <span>Mediator</span>
+              <span>Expert</span>
+            </div>
+            <% for( let i=0; i < technologies.length; i++ ) { %>
+              <div class="grid flex" id="<%=technologies[i].name%>">
+                <span>
+                  <%=technologies[i].name%>
+                </span>
+                <input type="radio" name="technologies['<%=technologies[i].id%>']"
+                  id="technology_<%=technologies[i].id%>_beginer" value="1"
+                  onclick="if(this.wasChecked) { this.checked = false; this.wasChecked = false; } else { this.wasChecked = true; }" />
+                <input type="radio" name="technologies['<%=technologies[i].id%>']"
+                  id="technology_<%=technologies[i].id%>_mideator" value="2"
+                  onclick="if(this.wasChecked) { this.checked = false; this.wasChecked = false; } else { this.wasChecked = true; }" />
+                <input type="radio" name="technologies['<%=technologies[i].id%>']"
+                  id="technology_<%=technologies[i].id%>_expert" value="3"
+                  onclick="if(this.wasChecked) { this.checked = false; this.wasChecked = false; } else { this.wasChecked = true; }" />
+              </div>
+              <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="heading">Reference Contact</div>
+      <div class="contant flex-col">
+        <div class="line-bold" id="line_referance_<%= i %>"></div>
+          
+        <div class="flex flex-col" id="AddReferance">
+
+            <% for( let i = 0; i < formdata.referances.length; i++ ) { %>
+            
+
+                  <div class="flex" id="referance_<%= i %>">
+          <div>
+            <label for="referance_name_<%= i %>">Referance Name</label>
+            <input type="text" id="referance_name_<%= i %>" name="referance_name[]" value="<%= fromdata.referances[i].ref_name %>"  />
+          </div>
+          <div>
+            <label for="company_contact_<%= i %>">Referance Contact</label>
+            <input type="text" id="company_contact_<%= i %>" name="referance_contact[]" value="<%= fromdata.referances[i].ref_contact %> "/>
+          </div>
+          <div>
+            <label for="company_relation_<%= i %>">Relation</label>
+            <input type="text" id="company_relation_<%= i %>" name="referance_relation[]" value="<%= fromdata.referances[i].relations %> "/>
+          </div>
+        </div>
+        <div class="line-bold" id="line_referance_<%= i %>"></div>
+
+
+
+            <% } %>
+
+        </div>
+      </div>
+      <div>
+        <div class="btn-box">
+          <span class="span-btn" onclick="referanceAdd()">+</span>
+          <span class="span-btn" onclick="referanceRemove()">-</span>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="heading">Preferences</div>
+      <div class="contant">
+        <div class="flex" id="company">
+          <div>
+            <label for="preferd_location">Preferred Location</label>
+            <textarea name="preferd_location" id="preferd_location"><%= formdata.prefrence[0].location %></textarea>
+          </div>
+          <div class="flex flex-col">
+            <div>
+              <label for="notice_period">Notice Period</label>
+              <input type="text" id="notice_period" name="notice_period" value="<%= formdata.prefrence[0].notice_period %>"/>
+            </div>
+            <div>
+              <label for="expacted_ctc">Expected CTC</label>
+              <input type="text" id="expacted_ctc" name="expacted_ctc" placeholder="360000" value="<%= formdata.prefrence[0].expected_ctc %>"/>
+            </div>
+            <div>
+              <label for="current_ctc">Current CTC</label>
+              <input type="text" id="current_ctc" name="current_ctc" placeholder="360000" value="<%= formdata.prefrence[0].current_ctc %>"/>
+            </div>
+          </div>
+          <div>
+            <label for="department">Department</label>
+            <select name="department" id="department" value="<%= formdata.prefrence[0].department_id %>">
+
+
+              <% deparments.forEach(deparment => { %>
+                <option value="<%= deparment.id %>">
+                  <%= deparment.name %>
+                </option>
+
+                <% }) %>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <input type="submit" value="submit">
+      <input type="reset" value="Reset" />
+    </div>
+  </form>
+  <!-- <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+  <script src="/JS/validation.js"></script> -->
+  <script src="/JS/script_edit.js"></script>
+  <script src="/JS/language.js"></script>
+  <script src="/JS/tech.js"></script>
+</body>
+
+</html>

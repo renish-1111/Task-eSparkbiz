@@ -7,6 +7,8 @@ const basicdetailpreviewService = require("../services/basicdetailpreview.servic
 const connection = require("../db/db.config")
 const basicdetailSchema = require("../validation/basic_detail")
 class FormController {
+
+    // form design show at index.ejs
     async showForm(req, res, next) {
         try {
             const languages = await languageService.showAllLanguage()
@@ -26,19 +28,20 @@ class FormController {
             console.log(error);
         }
     }
-
+    // formentry table preview at view.ejs
     async showEntry(req, res, next) {
 
         const basicdetailpreview = await basicdetailpreviewService.showDetailPreview();
         console.log(basicdetailpreview);
-        
+
         res.render("view", {
-                layout: 'base',
-                title: 'View Page',
-                basicdetailpreview: basicdetailpreview,
-            });
+            layout: 'base',
+            title: 'View Page',
+            basicdetailpreview: basicdetailpreview,
+        });
     }
 
+    // post req /form store in db
     async submitForm(req, res, next) {
         const conn = await connection.getConnection();
         try {
@@ -51,7 +54,7 @@ class FormController {
                 email: formData.email,
                 phone: formData.phone,
                 gender: formData.gender,
-                relationshipstatus: formData.relationshipstatus,
+                relationshipstatus: parseInt(formData.relationshipstatus),
                 designation: formData.designation,
                 bod: new Date(formData.bod),
             }
@@ -146,7 +149,7 @@ class FormController {
                 )
             }
 
-            
+
 
             const [basicdetailId, addressId, educationIds, languageIds, technologyIds, referanceIds, prefrenceId, experienceIds] = await formService.submitForm(basicdetail, address, educations, languages, technologies, referances, prefrence, experiences);
 
@@ -155,6 +158,55 @@ class FormController {
             console.log(error);
             res.status(500).send(`An error occurred while submitting the form: : ${error}`);
         }
+    }
+
+    async viewForm(req, res, next) {
+        const id = parseInt(req.params.id)
+        const formdata = await formService.showForm(id);
+
+        console.log(formdata);
+        res.render("application", {
+            layout: 'base',
+            title: 'Application Page',
+            formdata
+        });
+
+    }
+    async editViewForm(req, res, next) {
+        const id = parseInt(req.params.id)
+        const formdata = await formService.showForm(id);
+
+        const languages = await languageService.showAllLanguage()
+        const technologies = await technologyService.showAllTechnology()
+        const relationshipstatus = await relationshipStatusService.showAllRelationshipStatus()
+        const deparments = await departmentService.showAllDepartent()
+
+        console.log(formdata);
+        res.render("edit", {
+            layout: 'base',
+            title: 'Edit Page',
+            formdata,
+            languages: languages,
+            technologies: technologies,
+            relationshipstatus: relationshipstatus,
+            deparments: deparments,
+
+        });
+
+    }
+
+    async deleteForm(req, res, next) {
+        try {
+            const id = parseInt(req.params.id)
+            const rowDeleted = await formService.deleteForm(id);
+            res.redirect("/view");
+
+        } catch (error) {
+            console.log(error);
+            res.redirect("/view");
+        }
+
+
     }
 
 

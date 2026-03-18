@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  
+</head>
+
+<body>
+  <div class="text-center">Job Application Form</div>
+  <form id="jobForm" action="/form" method="POST" onsubmit="console.log('sad')">
+    <!-- basic detail -->
+    <div class="container">
+      <div class="heading">Basic Detail</div>
+      <div class="contant flex">
+        <div class="part1">
+          <div>
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" value="<%= formdata.basicdetail[0].fname  %>" disabled/>
+          </div>
+          <div>
+            <label for="designation">Designation</label>
+            <input type="text" id="designation" name="designation" value="<%= formdata.basicdetail[0].designation %>" disabled/>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" value="<%= formdata.basicdetail[0].email %>" disabled />
+          </div>
+          <div>
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" inputmode="numeric" name="phone" value="<%= formdata.basicdetail[0].phone %>" disabled/>
+          </div>
+          <div id="radio_gender">
+            <label>Gender</label>
+            <input type="radio" id="male" value="1" name="gender" disabled <% if (formdata.basicdetail[0].gender == 1) { %>
+             checked
+            <% } %> />
+            <label for="male">Male</label>
+            <input type="radio" id="female" value="0" name="gender" disabled <% if (formdata.basicdetail[0].gender == 0) { %>
+             checked
+            <% } %>/>
+            <label for="female">Female</label>
+          </div>
+          <div>
+            <label for="relationshipstatus">Relationship Status</label>
+            <input type="text" value="<%= formdata.basicdetail[0].relationship_status_name %>" disabled>
+          </div>
+        </div>
+
+        <div class="part2">
+          <div>
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" value="<%= formdata.basicdetail[0].lname %>" disabled/>
+          </div>
+          <div>
+            <label for="address1">Address 1</label>
+            <input type="text" id="address1" name="address1" value="<%= formdata.address[0].address1 %>" disabled/>
+          </div>
+          <div>
+            <label for="address2">Address 2</label>
+            <input type="text" id="address2" name="address2" value="<%= formdata.address[0].address2 %>" disabled/>
+          </div>
+          <div>
+            <label for="city">City</label>
+            <input type="text" id="city" class="city" name="city" value="<%= formdata.address[0].city %>" disabled/>
+          </div>
+          <div>
+            <label for="state">State</label>
+           <input type="text" value="<%= formdata.address[0].state %>" disabled />
+          </div>
+          <div>
+            <label for="zipcode">Zip Code</label>
+            <input type="text" id="zipcode" name="zipcode" inputmode="numeric" class="zipcode" value="<%= formdata.address[0].zipcode %>" disabled/>
+          </div>
+          <div>
+            <label for="bod">Date of Birth</label>
+            <input type="text" id="bod" name="bod" placeholder="01/01/2000" value="<%= formdata.basicdetail[0].bod %>" disabled />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- education detail -->
+    <div class="container">
+      <div class="heading">Education Detail</div>
+      <div class="contant flex-col" id="education">
+        <!-- ssc -->
+
+
+        <!-- dynamic degree -->
+        
+        <div id="addDegree" class="flex-col flex">
+            <% formdata.educaitons.forEach(educaiton => { %>
+             <div id="degree_${degreeCount}">
+            <div>Degree</div>
+            <div class="flex">
+              <div>
+                <label for="course_degree_${degreeCount}">Course Name</label>
+                <input type="text" id="course_degree_${degreeCount}" name="course_name[]" value="<%= educaiton.degree_name %>" disabled/>
+              </div>
+              <div>
+                <label for="university_degree_${degreeCount}">University</label>
+                <input
+                  type="text"
+                  id="university_degree_${degreeCount}"
+                  name="university[]"
+                  value="<%= educaiton.university %>" disabled
+                />
+              </div>
+              <div>
+                <label for="pass_year_degree_${degreeCount}">Passing Year</label>
+                <input
+                  type="text"
+                  id="pass_year_degree_${degreeCount}"
+                  name="course_pass[]"
+                  value="<%= educaiton.passing_year %>" disabled
+                />
+              </div>
+              <div>
+                <label for="percentage_degree_${degreeCount}">Percentage</label>
+                <input
+                  type="text"
+                  id="percentage_degree_${degreeCount}"
+                  name="course_percentage[]"
+                  value="<%= educaiton.percentage %>" disabled
+                />
+              </div>
+            </div>
+          </div>
+        <div class="line-bold" id="line_degree_${degreeCount}"></div>
+            <% }) %>
+          <div class="line-bold" ></div>
+
+         
+
+        </div>
+        
+      </div>
+    </div>
+    <div class="container">
+      <div class="heading">Work Experience</div>
+      <div class="contant flex-col">
+                  <div class="line-bold"></div>
+
+        <div class="flex-col flex" id="addExperience">
+
+             <% formdata.experiences.forEach(experience => { %>
+           <div class="flex" id="experience_${experienceCount}">
+            <div>
+              <label for="company_name_${experienceCount}">Comapny Name</label>
+              <input type="text" id="company_name_${experienceCount}" name="company_name[]" value="<%= experience.company_name %>" disabled />
+            </div>
+            <div>
+              <label for="company_designation_${experienceCount}"> Designation</label>
+              <input type="text" id="company_designation_${experienceCount}" name="company_designation[]" value="<%= experience.designation %>" disabled />
+            </div>
+            <div>
+              <label for="company_from_${experienceCount}">From</label>
+              <input type="text" id="company_from_${experienceCount}" name="company_from[]" value="<%= experience.from_date %>" disabled/>
+            </div>
+            <div>
+              <label for="company_to_${experienceCount}">To</label>
+              <input type="text" id="company_to_${experienceCount}" name="company_to[]" value="<%= experience.to_date %>" disabled/>
+            </div>
+          </div>
+          <div class="line-bold" id="line_experience_${experienceCount}"></div>
+          <% }) %>
+
+
+        </div>
+      </div>
+     
+    </div>
+    <div class="flex">
+      <div class="container">
+        <div class="heading">Languages Known</div>
+        <div class="contant">
+          <div class="flex flex-col" id="lang">
+            <div class="grid">
+              <span>Language</span>
+              <span>Read</span>
+              <span>Write</span>
+              <span>Speak</span>
+            </div>
+
+            <% formdata.candidate_language.forEach(lang => { %>
+             <div class="grid" id="<%= lang.name %>">
+                <span>
+                  <%= lang.name %>
+                </span>
+                <input type="checkbox" name=""
+                  id="" value="1" <% if (lang.can_read) { %>
+                   checked
+                  <% } %>  disabled />
+                <input type="checkbox" name=""
+                  id="" value="1" <% if (lang.can_write) { %>
+                   checked
+                  <% } %> disabled/>
+                <input type="checkbox" name=""
+                  id="" value="1" <% if (lang.can_speak) { %>
+                   checked
+                  <% } %> disabled/>
+              </div>
+            <% }) %>
+
+           
+
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="heading">Technologies Known</div>
+        <div class="contant">
+          <div class="flex flex-col" id="tech">
+            <div class="grid">
+              <span>Technology</span>
+              <span>Beginner</span>
+              <span>Mediator</span>
+              <span>Expert</span>
+            </div>
+
+            <% formdata.candidate_technology.forEach(tech => { %>
+                <div class="grid flex" id="<%=tech.name%>">
+                <span>
+                  <%=tech.name%>
+                </span>
+                <input type="radio" name="technologies['<%=tech.id%>']"
+                  id="technology_<%=tech.id%>_beginer" value="1"
+                  <% if (tech.experty_level == 1) { %>
+                   checked
+                  <% } %> disabled
+                  onclick="if(this.wasChecked) { this.checked = false; this.wasChecked = false; } else { this.wasChecked = true; }" />
+                <input type="radio" name="technologies['<%=tech.id%>']"
+                  id="technology_<%=tech.id%>_mideator" value="2"
+                  <% if (tech.experty_level == 2) { %>
+                   checked
+                  <% } %> disabled
+                  onclick="if(this.wasChecked) { this.checked = false; this.wasChecked = false; } else { this.wasChecked = true; }" />
+                <input type="radio" name="technologies['<%=tech.id%>']"
+                  id="technology_<%=tech.id%>_expert" value="3" disabled
+                  <% if (tech.experty_level == 3) { %>
+                   checked
+                  <% } %>
+                  
+                  onclick="if(this.wasChecked) { this.checked = false; this.wasChecked = false; } else { this.wasChecked = true; }" />
+              </div>
+            <% }) %>
+
+           
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="heading">Reference Contact</div>
+      <div class="contant flex-col">
+        <div class="line-bold" id="line_referance_${referanceCount}"></div>
+          
+        <div class="flex flex-col" id="AddReferance">
+          
+          <% formdata.referances.forEach(referance => { %>
+            <div class="flex" id="referance_${referanceCount}">
+          <div>
+            <label for="referance_name_${referanceCount}">Referance Name</label>
+            <input type="text" id="referance_name_${referanceCount}" name="referance_name[]" value="<%= referance.ref_name %> " disabled/>
+          </div>
+          <div>
+            <label for="company_contact_${referanceCount}">Referance Contact</label>
+            <input type="text" id="company_contact_${referanceCount}" name="referance_contact[]" value="<%= referance.ref_contact %> " disabled/>
+          </div>
+          <div>
+            <label for="company_relation_${referanceCount}">Relation</label>
+            <input type="text" id="company_relation_${referanceCount}" name="referance_relation[]" value="<%= referance.relations %> " disabled />
+          </div>
+        </div>
+        <div class="line-bold" id="line_referance_${referanceCount}"></div>
+
+          <% }) %>
+
+        </div>
+      </div>
+      <div>
+        
+      </div>
+    </div>
+    <div class="container">
+      <div class="heading">Preferences</div>
+      <div class="contant">
+        <div class="flex" id="company">
+          <div>
+            <label for="preferd_location">Preferred Location</label>
+            <input name="preferd_location" id="preferd_location" value="<%= formdata.prefrence[0].location %>" disabled />
+          </div>
+          <div class="flex flex-col">
+            <div>
+              <label for="notice_period">Notice Period</label>
+              <input type="text" id="notice_period"  name="notice_period" value="<%= formdata.prefrence[0].notice_period %>" disabled />
+            </div>
+            <div>
+              <label for="expacted_ctc">Expected CTC</label>
+              <input type="text" id="expacted_ctc" name="expacted_ctc" placeholder="360000" value="<%= formdata.prefrence[0].expected_ctc %>" disabled />
+            </div>
+            <div>
+              <label for="current_ctc">Current CTC</label>
+              <input type="text" id="current_ctc" name="current_ctc" placeholder="360000" value="<%= formdata.prefrence[0].current_ctc %>" disabled />
+            </div>
+          </div>
+          <div>
+            <label for="department">Department</label>
+            <input type="text" value="<%= formdata.prefrence[0].department_name %>" disabled>
+
+
+
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div>
+      <input type="submit" value="submit">
+      <input type="reset" value="Reset" />
+    </div> -->
+  </form>
+  <!-- <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+  <script src="JS/validation.js"></script> -->
+  <!-- <script src="JS/script.js"></script>
+  <script src="JS/language.js"></script>
+  <script src="JS/tech.js"></script> -->
+</body>
+
+</html>

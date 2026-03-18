@@ -8,6 +8,9 @@ const formController = require("../controllers/form.controller")
 // Add routes
 router.get('/', formController.showForm);
 router.get('/view', formController.showEntry);
+router.get('/view/:id', formController.viewForm);
+router.get('/delete/:id', formController.deleteForm);
+router.get('/edit/:id', formController.editViewForm);
 router.post('/form', formController.submitForm);
 
 

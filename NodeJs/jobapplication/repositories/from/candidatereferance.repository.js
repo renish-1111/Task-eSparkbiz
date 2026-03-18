@@ -13,6 +13,15 @@ class CandidateReferanceRepository{
         });
         return referanceIds;
     }
+
+    async findById(id){
+        const sql = 'SELECT ref_name, ref_contact, relations FROM candidate_referance WHERE candidate_id = ?;';
+        const values = [id]
+        const [result] = await this.db.execute(sql, values)
+
+        return result;
+    }
+
 }
 
 module.exports = CandidateReferanceRepository;

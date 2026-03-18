@@ -14,6 +14,14 @@ class ExperienceRepository {
         });
         return experienceIds;
     }
+
+     async findById(id){
+        const sql = 'SELECT company_name, designation, from_date, to_date FROM experience WHERE candidate_id = ?;';
+        const values = [id]
+        const [result] = await this.db.execute(sql, values)
+
+        return result;
+    }
 }
 
 module.exports = ExperienceRepository;

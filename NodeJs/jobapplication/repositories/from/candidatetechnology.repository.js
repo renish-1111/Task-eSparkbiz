@@ -18,6 +18,14 @@ class CandidateTechnologyRepository {
         return technologyIds;
     }
 
+    async findById(id){
+        const sql = 'SELECT t.id, t.name, ct.experty_level FROM candidate_technologies AS ct JOIN technologies AS t ON t.id = ct.technology_id WHERE ct.candidate_id = ?;';
+        const values = [id]
+        const [result] = await this.db.execute(sql, values)
+
+        return result;
+    }
+
 }
 
 module.exports = CandidateTechnologyRepository;

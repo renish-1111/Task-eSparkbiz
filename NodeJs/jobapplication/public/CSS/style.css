@@ -113,3 +113,9 @@
   padding: 10px;
 }
 
+input:disabled{
+  color: black;
+}
+input:checked{
+  background:black;
+}

@@ -18,6 +18,14 @@ class EductionRepository {
         return educationIds;
     }
 
+    async findById(id){
+        const sql = 'SELECT degree_name, university, passing_year, percentage FROM educations WHERE candidate_id = ?;';
+        const values = [id]
+        const [result] = await this.db.execute(sql, values)
+
+        return result;
+    }
+
 }
 
 module.exports = EductionRepository;

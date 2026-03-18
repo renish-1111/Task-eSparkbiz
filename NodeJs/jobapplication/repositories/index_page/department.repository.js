@@ -10,6 +10,7 @@ class DeparmentRepository {
         const result = await this.db.execute(sql);
         return result[0]
     }
+
 }
 
 module.exports = DeparmentRepository;

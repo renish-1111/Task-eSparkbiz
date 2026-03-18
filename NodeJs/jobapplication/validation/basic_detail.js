@@ -7,7 +7,7 @@ const phoneSchema = z.string().regex(/^[0-9]+/)
 const relationshipstatusSchema = z.number()
 const addressSchema = z.string().max(100).nonempty()
 const zipcodeSchema = z.string().regex(/^[0-9]+/)
-const bodSchema = z.string().refine((value) => {
+const bodSchema = z.refine((value) => {
     const date = new Date(value);
     const now = new Date();
     return date < now;

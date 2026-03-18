@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS languages;
 CREATE TABLE IF NOT EXISTS languages (
     id INT UNSIGNED,
     name VARCHAR(100) NOT NULL,
-    CONSTRAINT pk_languages_id PRIMARY KEY (id)
+    CONSTRAINT pk_languages_id PRIMARY KEY (id) 
 );
 
 INSERT INTO
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS basic_details (
         LENGTH(phone) BETWEEN 10 AND 13
     ),
     CONSTRAINT chk_basic_detail_gender CHECK (gender IN (0, 1)),
-    CONSTRAINT fk_basic_detail_relationship_status_relationship_status_id FOREIGN KEY (relationship_status_id) REFERENCES relationship_status (id)
+    CONSTRAINT fk_basic_detail_relationship_status_relationship_status_id FOREIGN KEY (relationship_status_id) REFERENCES relationship_status (id) ON DELETE CASCADE
 )
 
 DROP TABLE IF EXISTS addresses;
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS addresses (
     city VARCHAR(100) NOT NULL,
     zipcode VARCHAR(6) NOT NULL,
     CONSTRAINT pk_addresses_candidate_id PRIMARY KEY (candidate_id),
-    CONSTRAINT fk_addresses_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id),
+    CONSTRAINT fk_addresses_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id) ON DELETE CASCADE,
     CONSTRAINT chk_addresses_zipcode CHECK (LENGTH(zipcode) = 6)
 );
 
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS educations (
     passing_year YEAR NOT NULL,
     percentage DECIMAL(5, 2) NOT NULL,
     CONSTRAINT pk_educations_id PRIMARY KEY (id),
-    CONSTRAINT fk_educations_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id),
+    CONSTRAINT fk_educations_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id) ON DELETE CASCADE,
     CONSTRAINT chk_educations_percentage CHECK (percentage BETWEEN 0 AND 100),
     CONSTRAINT chk_educations_passing_year CHECK (
         passing_year <= YEAR(SYSDATE())
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS experience (
     from_date DATE NOT NULL,
     to_date DATE NOT NULL,
     CONSTRAINT pk_experience_id PRIMARY KEY (id),
-    CONSTRAINT fk_experience_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id),
+    CONSTRAINT fk_experience_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id) ON DELETE CASCADE,
     CONSTRAINT chk_experience_dates CHECK (from_date <= to_date)
 );
 
@@ -140,8 +140,8 @@ CREATE TABLE IF NOT EXISTS candidate_languages (
     can_write TINYINT UNSIGNED NOT NULL COMMENT "0 = NO , 1 = YES",
     can_speak TINYINT UNSIGNED NOT NULL COMMENT "0 = NO , 1 = YES",
     CONSTRAINT pk_candidate_languages_candidate_id_language_id PRIMARY KEY (candidate_id, language_id),
-    CONSTRAINT fk_candidate_languages_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id),
-    CONSTRAINT fk_candidate_languages_languages_language_id FOREIGN KEY (language_id) REFERENCES languages (id),
+    CONSTRAINT fk_candidate_languages_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id) ON DELETE CASCADE,
+    CONSTRAINT fk_candidate_languages_languages_language_id FOREIGN KEY (language_id) REFERENCES languages (id) ON DELETE CASCADE,
     CONSTRAINT chk_candidate_languages_read CHECK (can_read IN (0, 1)),
     CONSTRAINT chk_candidate_languages_write CHECK (can_write IN (0, 1)),
     CONSTRAINT chk_candidate_languages_speak CHECK (can_speak IN (0, 1))
@@ -154,8 +154,8 @@ CREATE TABLE IF NOT EXISTS candidate_technologies (
     technology_id INT UNSIGNED NOT NULL,
     experty_level TINYINT UNSIGNED NOT NULL COMMENT "1 = BEGINNER , 2 = INTERMEDIATE , 3 = EXPERT",
     CONSTRAINT pk_candidate_technologies_candidate_id_technology_id PRIMARY KEY (candidate_id, technology_id),
-    CONSTRAINT fk_candidate_technologies_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id),
-    CONSTRAINT fk_candidate_technologies_technologies_technology_id FOREIGN KEY (technology_id) REFERENCES technologies (id),
+    CONSTRAINT fk_candidate_technologies_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id) ON DELETE CASCADE,
+    CONSTRAINT fk_candidate_technologies_technologies_technology_id FOREIGN KEY (technology_id) REFERENCES technologies (id) ON DELETE CASCADE,
     CONSTRAINT chk_candidate_technologies_experty_level CHECK (experty_level IN (1, 2, 3))
 );
 
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS candidate_referance (
     ref_contact VARCHAR(12) NOT NULL,
     relations VARCHAR(255) NOT NULL,
     CONSTRAINT pk_candidate_referance_id PRIMARY KEY (id),
-    CONSTRAINT fk_candidate_referance_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id)
+    CONSTRAINT fk_candidate_referance_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS candidate_prefrence;
@@ -181,6 +181,6 @@ CREATE TABLE IF NOT EXISTS candidate_prefrence (
     expected_ctc DECIMAL(7) NOT NULL COMMENT "Expected CTC in indian rupees",
     current_ctc DECIMAL(7) NOT NULL COMMENT "Current CTC in indian rupees",
     CONSTRAINT pk_candidate_prefrence_candidate_id_department_id PRIMARY KEY (candidate_id, department_id),
-    CONSTRAINT fk_candidate_prefrence_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id),
-    CONSTRAINT fk_candidate_prefrence_deparments_department_id FOREIGN KEY (department_id) REFERENCES deparments (id)
+    CONSTRAINT fk_candidate_prefrence_basic_detail_candidate_id FOREIGN KEY (candidate_id) REFERENCES basic_details (id) ON DELETE CASCADE,
+    CONSTRAINT fk_candidate_prefrence_deparments_department_id FOREIGN KEY (department_id) REFERENCES deparments (id) ON DELETE CASCADE
 );

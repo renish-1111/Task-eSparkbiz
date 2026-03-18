@@ -18,6 +18,14 @@ class CandidateLanguagesRepository {
         return languageIds;
     }
 
+    async findById(id){
+        const sql = 'SELECT cl.language_id, l.name, cl.can_read, cl.can_write, cl.can_speak FROM candidate_languages AS cl JOIN languages AS l ON l.id = cl.language_id  WHERE cl.candidate_id = ?;';
+        const values = [id]
+        const [result] = await this.db.execute(sql, values)
+
+        return result;
+    }
+
 }
 
 module.exports = CandidateLanguagesRepository;
