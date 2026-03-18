@@ -94,3 +94,22 @@
   display: none;
 }
 
+.table-container{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+}
+.data{
+  text-align: center;
+  border: 1px solid;
+  padding: 10px;
+
+}
+
+.head{
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid;
+  padding: 10px;
+}
+

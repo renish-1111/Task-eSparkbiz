@@ -12,6 +12,12 @@ class BasicDetailRepository {
         const [result] = await this.db.execute(sql, values);
         return result.insertId;
     }
+
+    async findAllPreview(){
+        const sql = "SELECT id, fname, lname, email FROM basic_details;"
+        const [result] = await this.db.execute(sql);
+        return result;
+    }
 }
 
 module.exports = BasicDetailRepository;

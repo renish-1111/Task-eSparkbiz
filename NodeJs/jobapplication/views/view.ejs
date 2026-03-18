@@ -1,15 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <% basicdetailpreview.forEach(obj => { %>
-       <div> <%= obj.id %> </div> 
 
-    <% }) %>
+<body>
+    <div>
+        <div>
+            <h1>Basic Details</h1>
+        </div>
+
+        <div class="table-container">
+            <div class="head">id</div>
+            <div class="head">First Name</div>
+            <div class="head">Last Name</div>
+            <div class="head">Email</div>
+            <div class="head">Action</div>
+
+            <% basicdetailpreview.forEach(obj=> { %>
+                <div class="data">
+                    <%= obj.id %>
+                </div>
+                <div class="data">
+                    <%= obj.fname %>
+                </div>
+                <div class="data">
+                    <%= obj.lname %>
+                </div>
+                <div class="data">
+                    <%= obj.email %>
+                </div>
+                <div class="data">
+                    <a href="/view/<%= obj.id %>">View</a>
+                    <a href="/edit/<%= obj.id %>">Edit</a>
+                    <a href="/delete/<%= obj.id %>">Delete</a>
+                </div>
+                <% }) %>
+        </div>
+    </div>
 
 </body>
+
 </html>

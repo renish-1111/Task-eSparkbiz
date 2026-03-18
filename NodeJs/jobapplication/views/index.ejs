@@ -22,7 +22,7 @@
           </div>
           <div>
             <label for="designation">Designation</label>
-            <input fname="designation" type="text" id="designation" name="designation" />
+            <input type="text" id="designation" name="designation" />
           </div>
           <div>
             <label for="email">Email</label>
@@ -87,7 +87,7 @@
             <input type="text" id="zipcode" name="zipcode" inputmode="numeric" class="zipcode" />
           </div>
           <div>
-            <label for="bod">Birth of Date</label>
+            <label for="bod">Date of Birth</label>
             <input type="text" id="bod" name="bod" placeholder="01/01/2000" />
           </div>
         </div>
@@ -128,7 +128,7 @@
     </div>
     <div class="flex">
       <div class="container">
-        <div class="heading">Language Know</div>
+        <div class="heading">Languages Known</div>
         <div class="contant">
           <div class="flex flex-col" id="lang">
             <div class="grid">
@@ -155,13 +155,13 @@
         </div>
       </div>
       <div class="container">
-        <div class="heading">Technoknlogy Know</div>
+        <div class="heading">Technologies Known</div>
         <div class="contant">
           <div class="flex flex-col" id="tech">
             <div class="grid">
-              <span>Technoknlogy</span>
-              <span>Beginer</span>
-              <span>Mideator</span>
+              <span>Technology</span>
+              <span>Beginner</span>
+              <span>Mediator</span>
               <span>Expert</span>
             </div>
             <% for( let i=0; i < technologies.length; i++ ) { %>
@@ -185,7 +185,7 @@
       </div>
     </div>
     <div class="container">
-      <div class="heading">Referance Contact</div>
+      <div class="heading">Reference Contact</div>
       <div class="contant flex-col">
         <div class="line-bold" id="line_referance_${referanceCount}"></div>
           
@@ -199,20 +199,20 @@
       </div>
     </div>
     <div class="container">
-      <div class="heading">Preferances</div>
+      <div class="heading">Preferences</div>
       <div class="contant">
         <div class="flex" id="company">
           <div>
-            <label for="preferd_location">Preferd location</label>
+            <label for="preferd_location">Preferred Location</label>
             <textarea name="preferd_location" id="preferd_location"></textarea>
           </div>
           <div class="flex flex-col">
             <div>
-              <label for="notice_period">Notice period</label>
+              <label for="notice_period">Notice Period</label>
               <input type="text" id="notice_period" name="notice_period" />
             </div>
             <div>
-              <label for="expacted_ctc">Expacted CTC</label>
+              <label for="expacted_ctc">Expected CTC</label>
               <input type="text" id="expacted_ctc" name="expacted_ctc" placeholder="360000" />
             </div>
             <div>

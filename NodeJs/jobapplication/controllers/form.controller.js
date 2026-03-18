@@ -5,7 +5,7 @@ const departmentService = require("../services/department.service")
 const formService = require("../services/form.service");
 const basicdetailpreviewService = require("../services/basicdetailpreview.service")
 const connection = require("../db/db.config")
-
+const basicdetailSchema = require("../validation/basic_detail")
 class FormController {
     async showForm(req, res, next) {
         try {
@@ -29,7 +29,7 @@ class FormController {
 
     async showEntry(req, res, next) {
 
-        const basicdetailpreview = await basicdetailpreviewService.showDetail();
+        const basicdetailpreview = await basicdetailpreviewService.showDetailPreview();
         console.log(basicdetailpreview);
         
         res.render("view", {
@@ -55,9 +55,12 @@ class FormController {
                 designation: formData.designation,
                 bod: new Date(formData.bod),
             }
+            basicdetailSchema.parse(basicdetail);
+
+
             const address = {
                 address1: formData.address1,
-                address2: formData.address1,
+                address2: formData.address2,
                 state: formData.state,
                 city: formData.city,
                 zipcode: formData.zipcode,
@@ -108,7 +111,7 @@ class FormController {
             const referance_relation = req.body.referance_relation;
 
             let referances = [];
-            for (let i = 0; i < degree_name.length; i++) {
+            for (let i = 0; i < referance_name.length; i++) {
                 referances.push(
                     {
                         referance_name: referance_name[i],
@@ -125,14 +128,32 @@ class FormController {
                 expacted_ctc: req.body.expacted_ctc,
                 current_ctc: req.body.current_ctc,
             }
-            console.log(prefrence);
 
-            const [basicdetailId, addressId, educationIds, languageIds, technologyIds, referanceIds, prefrenceId] = await formService.submitForm(basicdetail, address, educations, languages, technologies, referances, prefrence)
+            const company_name = req.body.company_name;
+            const company_designation = req.body.company_designation;
+            const company_from = req.body.company_from;
+            const company_to = req.body.company_to;
 
-            res.redirect('/view', { message: "Form Submite Successfully!" });
+            let experiences = [];
+            for (let i = 0; i < company_name.length; i++) {
+                experiences.push(
+                    {
+                        company_name: company_name[i],
+                        designation: company_designation[i],
+                        from_date: company_from[i],
+                        to_date: company_to[i],
+                    }
+                )
+            }
+
+            
+
+            const [basicdetailId, addressId, educationIds, languageIds, technologyIds, referanceIds, prefrenceId, experienceIds] = await formService.submitForm(basicdetail, address, educations, languages, technologies, referances, prefrence, experiences);
+
+            res.status(302).redirect('/view');
         } catch (error) {
             console.log(error);
-            res.status(500).send("An error occurred while submitting the form");
+            res.status(500).send(`An error occurred while submitting the form: : ${error}`);
         }
     }
 
