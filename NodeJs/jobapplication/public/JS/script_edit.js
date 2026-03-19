@@ -237,7 +237,7 @@ function experienceRemove() {
   }
 }
 
-let referanceCount = 1
+let referanceCount = window.referanceCount
 function referanceAdd() {
   let html = `
 

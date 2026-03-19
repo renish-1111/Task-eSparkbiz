@@ -103,7 +103,7 @@
       <div class="heading">Education Detail</div>
       <div class="contant flex-col" id="education">
         <!-- ssc -->
-        <% window.degreeCount = formdata.educaitons.length + 1 %>
+        
 
         <!-- dynamic degree -->
         
@@ -163,28 +163,28 @@
     </div>
     <div class="container">
       <div class="heading">Work Experience</div>
-      <% window.experienceCount = formdata.experiences.length + 1 %>
+   
       <div class="contant flex-col">
                   <div class="line-bold"></div>
-                  <% for( let i = 0; i < array.length; i++ ) { %>
+                  <% for( let i = 1; i <= formdata.experiences.length; i++ ) { %>
                   
 
                     <div class="flex" id="experience_<%= i %>">
             <div>
               <label for="company_name_<%= i %>">Comapny Name</label>
-              <input type="text" id="company_name_<%= i %>" name="company_name[]" value="<%= formdata.experiences[i+1].company_name%>" />
+              <input type="text" id="company_name_<%= i %>" name="company_name[]" value="<%= formdata.experiences[i-1].company_name%>" />
             </div>
             <div>
               <label for="company_designation_<%= i %>"> Designation</label>
-              <input type="text" id="company_designation_<%= i %>" name="company_designation[]" value="<%= formdata.experiences[i+1].designation %>" />
+              <input type="text" id="company_designation_<%= i %>" name="company_designation[]" value="<%= formdata.experiences[i-1].designation %>" />
             </div>
             <div>
               <label for="company_from_<%= i %>">From</label>
-              <input type="date" id="company_from_<%= i %>" name="company_from[]" value="<%= formdata.experiences[i+1].from_date %>"/>
+              <input type="date" id="company_from_<%= i %>" name="company_from[]" value="<%= formdata.experiences[i-1].from_date %>"/>
             </div>
             <div>
               <label for="company_to_<%= i %>">To</label>
-              <input type="date" id="company_to_<%= i %>" name="company_to[]" value="<%= formdata.experiences[i+1].to_date%>"/>
+              <input type="date" id="company_to_<%= i %>" name="company_to[]" value="<%= formdata.experiences[i-1].to_date%>"/>
             </div>
           </div>
         <div class="line-bold" id="line_experience_<%= i %>"></div>
@@ -261,7 +261,7 @@
     <div class="container">
       <div class="heading">Reference Contact</div>
       <div class="contant flex-col">
-        <div class="line-bold" id="line_referance_<%= i %>"></div>
+        <div class="line-bold" id="line_referance_i"></div>
           
         <div class="flex flex-col" id="AddReferance">
 
@@ -271,15 +271,15 @@
                   <div class="flex" id="referance_<%= i %>">
           <div>
             <label for="referance_name_<%= i %>">Referance Name</label>
-            <input type="text" id="referance_name_<%= i %>" name="referance_name[]" value="<%= fromdata.referances[i].ref_name %>"  />
+            <input type="text" id="referance_name_<%= i %>" name="referance_name[]" value="<%= formdata.referances[i].ref_name %>"  />
           </div>
           <div>
             <label for="company_contact_<%= i %>">Referance Contact</label>
-            <input type="text" id="company_contact_<%= i %>" name="referance_contact[]" value="<%= fromdata.referances[i].ref_contact %> "/>
+            <input type="text" id="company_contact_<%= i %>" name="referance_contact[]" value="<%= formdata.referances[i].ref_contact %> "/>
           </div>
           <div>
             <label for="company_relation_<%= i %>">Relation</label>
-            <input type="text" id="company_relation_<%= i %>" name="referance_relation[]" value="<%= fromdata.referances[i].relations %> "/>
+            <input type="text" id="company_relation_<%= i %>" name="referance_relation[]" value="<%= formdata.referances[i].relations %> "/>
           </div>
         </div>
         <div class="line-bold" id="line_referance_<%= i %>"></div>
@@ -340,11 +340,16 @@
       <input type="reset" value="Reset" />
     </div>
   </form>
+  <script>
+    window.experienceCount = parseInt("<%= formdata.experiences.length %>") + 1;
+    window.degreeCount = parseInt("<%= formdata.educaitons.length %>") + 1;
+    window.referanceCount = parseInt("<%= formdata.referances.length %>") + 1;
+  </script>
   <!-- <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
   <script src="/JS/validation.js"></script> -->
   <script src="/JS/script_edit.js"></script>
-  <script src="/JS/language.js"></script>
-  <script src="/JS/tech.js"></script>
+  <!-- <script src="/JS/language.js"></script> -->
+  <!-- <script src="/JS/tech.js"></script> -->
 </body>
 
 </html>
