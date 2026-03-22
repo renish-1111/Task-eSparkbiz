@@ -1,0 +1,133 @@
+<script>
+  let url = window.location.search;
+  const params = new URLSearchParams(url);
+  let page = params.get("page") || 1;
+  let offset = params.get("offset") || 100;
+  let search = params.get("search") || "";
+  let sorting = params.get("sorting") || "id,asc";
+  let isAnd = params.get("isAnd") || 0;
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentOffset = urlParams.get("offset");
+    const currentSearch = urlParams.get("search");
+    const currentPage = urlParams.get("page");
+    const currentIsAnd = urlParams.get("isAnd");
+
+    if (currentOffset) {
+      document.getElementById("offset").value = currentOffset;
+    }
+    if (currentSearch) {
+      document.getElementById("search").value = currentSearch;
+    }
+    if (currentIsAnd == 1) {
+      document.getElementById("isAnd").checked = true;
+    }
+
+    if (currentPage) {
+      if (parseInt(currentPage) > "<%= total %>") {
+        window.location.href = `/?page=<%= total %>&offset=${offset}&sorting=${sorting}&search=${search}&isAnd=${isAnd}`;
+      }
+      if (currentPage < 1 && "<%= total %>" != 0) {
+        window.location.href = `/?page=1&offset=${offset}&sorting=${sorting}&search=${search}&isAnd=${isAnd}`;
+      }
+      if (currentPage < 7 && "<%= total %>" != 0) {
+        document.getElementById("dotstart").classList.add("hidden");
+      }
+      if (currentPage > "<%= total %>" - 6) {
+        document.getElementById("dotend").classList.add("hidden");
+      }
+      if ("<%= total%>" == 0) {
+        document.getElementById("bar").classList.add("hidden");
+        document.getElementById("error").classList.remove("hidden");
+      }
+    }
+
+  });
+
+  document.getElementById("idasc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=id,asc&search=${search}&isAnd=${isAnd}`;
+  });
+  document.getElementById("iddesc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=id,desc&search=${search}&isAnd=${isAnd}`;
+  });
+  document.getElementById("fnameasc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=fname,asc&search=${search}&isAnd=${isAnd}`;
+  });
+  document.getElementById("fnamedesc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=fname,desc&search=${search}&isAnd=${isAnd}`;
+  });
+  document.getElementById("lnameasc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=lname,asc&search=${search}&isAnd=${isAnd}`;
+  });
+  document.getElementById("lnamedesc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=lname,desc&search=${search}&isAnd=${isAnd}`;
+  });
+  document.getElementById("cityasc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=city,asc&search=${search}&isAnd=${isAnd}`;
+  });
+  document.getElementById("citydesc").addEventListener("click", () => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=city,desc&search=${search}&isAnd=${isAnd}`;
+  });
+  document.getElementById("search").addEventListener("change", (e) => {
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=${sorting}&search=${e.target.value}&isAnd=${isAnd}`;
+  });
+  let dropdown = document.getElementById("offset");
+  dropdown.addEventListener("change", function (e) {
+    document.getElementById("offset").value = e.target.value;
+    window.location.href = `/?page=${page}&offset=${e.target.value}&sorting=${sorting}&search=${search}&isAnd=${isAnd}`;
+  });
+
+   let isAndElement = document.getElementById("isAnd")
+  isAndElement.addEventListener("change",function (e) {
+    if (isAndElement.checked) {
+      isAnd = 1;
+    }
+    else{
+      isAnd = 0
+    }
+    window.location.href = `/?page=${page}&offset=${offset}&sorting=${sorting}&search=${search}&isAnd=${isAnd}`;
+  })
+
+
+  // let pages = document.querySelectorAll(".pageblock");
+  for (let i = 1; i <= "<%= total %>"; i++) {
+    let link = document.getElementById(`p${i}`);
+    console.log(`p${i}`);
+
+    if (link) {
+      link.href = `/?page=${i}&offset=${offset}&sorting=${sorting}&search=${search}&isAnd=${isAnd}`;
+    }
+  }
+
+  document.getElementById(`block${page}`).classList.add("active");
+
+  document.getElementById("next").addEventListener("click", () => {
+    url = window.location.href;
+    console.log(url);
+
+    page = parseInt(url.split("page=")[1]);
+    console.log(page);
+
+    pageElement = document.getElementById(`p${page + 1}`);
+    if (pageElement) {
+      pageElement.click();
+    } else {
+      console.log("error");
+    }
+  });
+  document.getElementById("previous").addEventListener("click", () => {
+    url = window.location.href;
+    console.log(url);
+
+    page = parseInt(url.split("page=")[1]);
+    console.log(page);
+
+    pageElement = document.getElementById(`p${page - 1}`);
+    if (pageElement) {
+      pageElement.click();
+    } else {
+      console.log("error");
+    }
+  });
+</script>
