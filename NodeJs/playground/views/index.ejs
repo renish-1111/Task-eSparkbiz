@@ -10,7 +10,7 @@
 
 <body>
 
-    <div class="mb-10"><label for="isAnd"> With And  </label><input type="checkbox" name="isAnd" id="isAnd"><label for="search">search</label> <input type="text" id="search"></div>
+    <div class="mb-10"><label for="search">search</label> <input type="text" id="search"></div>
     <div><select name="" id="offset">
             <option value="10">10</option>
             <option value="50">50</option>
@@ -30,17 +30,10 @@
 
         </div>
         <div class="head flex gap-5">
-            <div>fname</div>
+            <div>name</div>
             <div class="flex">
-                <div id="fnameasc"><img class="img" src="up-arrow.png" alt=""></div>
-                <div id="fnamedesc"><img class="img flip" src="up-arrow.png" alt=""></div>
-            </div>
-        </div>
-        <div class="head flex gap-5">
-            <div>lname</div>
-            <div class="flex">
-                <div id="lnameasc"><img class="img" src="up-arrow.png" alt=""></div>
-                <div id="lnamedesc"><img class="img flip" src="up-arrow.png" alt=""></div>
+                <div id="nameasc"><img class="img" src="up-arrow.png" alt=""></div>
+                <div id="namedesc"><img class="img flip" src="up-arrow.png" alt=""></div>
             </div>
         </div>
         <div class="head flex gap-5">
@@ -50,7 +43,10 @@
         <div class="head flex gap-5">
             <div>phone</div>
         </div>
-       
+        <div class="head flex gap-5">
+            <div>address</div>
+
+        </div>
         <div class="head flex gap-5">
             <div>city</div>
             <div class="flex">
@@ -58,7 +54,16 @@
                 <div id="citydesc"><img class="img flip" src="up-arrow.png" alt=""></div>
             </div>
         </div>
-
+        <div class="head flex gap-5">
+            <div>dob</div>
+            <div class="flex">
+                <div id="dobasc"><img class="img" src="up-arrow.png" alt=""></div>
+                <div id="dobdesc"><img class="img flip" src="up-arrow.png" alt=""></div>
+            </div>
+        </div>
+        <div class="head flex gap-5">
+            <div>gender</div>
+        </div>
         <% data.forEach((item)=> { %>
 
             <div class="data">
@@ -69,15 +74,8 @@
                             <% } %>
             </div>
             <div class="data">
-                <% if (item.fname) { %>
-                    <%= item.fname %>
-                        <% } else { %>
-                            null
-                            <% } %>
-            </div>
-            <div class="data">
-                <% if (item.lname) { %>
-                    <%= item.lname %>
+                <% if (item.name) { %>
+                    <%= item.name %>
                         <% } else { %>
                             null
                             <% } %>
@@ -96,7 +94,13 @@
                             null
                             <% } %>
             </div>
-           
+            <div class="data">
+                <% if (item.address) { %>
+                    <%= item.address %>
+                        <% } else { %>
+                            null
+                            <% } %>
+            </div>
             <div class="data">
                 <% if (item.city) { %>
                     <%= item.city %>
@@ -104,7 +108,21 @@
                             null
                             <% } %>
             </div>
-        <% }) %>
+            <div class="data">
+                <% if (item.dob) { %>
+                    <%= new Date(item.dob).toLocaleDateString() %>
+                        <% } else { %>
+                            null
+                            <% } %>
+            </div>
+            <div class="data">
+                <% if (item.gender) { %>
+                    male
+                    <% } else { %>
+                        female
+                        <% } %>
+            </div>
+            <% }) %>
     </div>
     <div class="hidden" id="error">Not Found</div>
     <div class="pagination" id="bar">

@@ -55,7 +55,6 @@
 }
 
 .span-btn{
-  background: #bfbfbf;
   padding: 5px 20px;
   border: 2px solid;
   margin-top: 5px;
@@ -118,4 +117,13 @@ input:disabled{
 }
 input:checked{
   background:black;
+}
+
+.removebtn{
+  padding: 5px 20px;
+  border: 1px solid;
+  margin-top: 15px;
+  text-align: center;
+  background: #d2d2d2;
+  width: 100px;
 }

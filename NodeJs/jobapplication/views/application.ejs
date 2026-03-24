@@ -10,7 +10,7 @@
 
 <body>
   <div class="text-center">Job Application Form</div>
-  <form id="jobForm" action="/form" method="POST" onsubmit="console.log('sad')">
+  <form id="jobForm">
     <!-- basic detail -->
     <div class="container">
       <div class="heading">Basic Detail</div>
@@ -87,6 +87,7 @@
       <div class="heading">Education Detail</div>
       <div class="contant flex-col" id="education">
         <!-- ssc -->
+            <div class="line-bold" ></div>
 
 
         <!-- dynamic degree -->
@@ -131,7 +132,6 @@
           </div>
         <div class="line-bold" id="line_degree_${degreeCount}"></div>
             <% }) %>
-          <div class="line-bold" ></div>
 
          
 

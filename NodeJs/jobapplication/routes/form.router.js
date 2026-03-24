@@ -11,6 +11,7 @@ router.get('/view', formController.showEntry);
 router.get('/view/:id', formController.viewForm);
 router.get('/delete/:id', formController.deleteForm);
 router.get('/edit/:id', formController.editViewForm);
+router.post('/edit/:id', formController.editForm);
 router.post('/form', formController.submitForm);
 
 

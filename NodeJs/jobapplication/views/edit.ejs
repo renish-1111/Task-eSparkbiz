@@ -5,12 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
-  <link rel="stylesheet" href="CSS/style.css" />
+  <link rel="stylesheet" href="/CSS/style.css" />
 </head>
 
 <body>
   <div class="text-center">Job Application Form</div>
-  <form id="jobForm" action="/edit/<%= formdata.basicdetail[0].id  %>" method="PATCH" onsubmit="console.log('sad')">
+  <form id="jobForm" action="/edit/<%= formdata.basicdetail[0].id  %>" method="POST" onsubmit="console.log('sad')">
     <!-- basic detail -->
     <div class="container">
       <div class="heading">Basic Detail</div>
@@ -45,11 +45,13 @@
           </div>
           <div>
             <label for="relationshipstatus">Relationship Status</label>
-            <select name="relationshipstatus" id="relationshipstatus" value="<%= formdata.basicdetail[0].relationship_status_name %>">
+            <select name="relationshipstatus" id="relationshipstatus" >
 
 
               <% relationshipstatus.forEach(relation=> { %>
-                <option value="<%= relation.id%>">
+                <option value="<%= relation.id%>"  <% if (relation.id == formdata.basicdetail[0].relationship_status_name) { %>
+                 selected
+                <% } %> >
                   <%= relation.name%>
                 </option>
 
@@ -103,6 +105,7 @@
       <div class="heading">Education Detail</div>
       <div class="contant flex-col" id="education">
         <!-- ssc -->
+            <div class="line-bold" ></div>
         
 
         <!-- dynamic degree -->
@@ -153,7 +156,6 @@
 
             <% } %>
             
-            <div class="line-bold" ></div>
         </div>
         <div>
           <span class="span-btn" onclick="educationAdd()">+</span>
@@ -229,6 +231,7 @@
         </div>
       </div>
       <div class="container">
+        
         <div class="heading">Technologies Known</div>
         <div class="contant">
           <div class="flex flex-col" id="tech">
@@ -321,11 +324,13 @@
           </div>
           <div>
             <label for="department">Department</label>
-            <select name="department" id="department" value="<%= formdata.prefrence[0].department_id %>">
+            <select name="department" id="department" value="">
 
 
               <% deparments.forEach(deparment => { %>
-                <option value="<%= deparment.id %>">
+                <option value="<%= deparment.id %>" <% if (deparment.id == formdata.prefrence[0].department_id) { %>
+                 selected
+                <% } %> >
                   <%= deparment.name %>
                 </option>
 
@@ -344,12 +349,48 @@
     window.experienceCount = parseInt("<%= formdata.experiences.length %>") + 1;
     window.degreeCount = parseInt("<%= formdata.educaitons.length %>") + 1;
     window.referanceCount = parseInt("<%= formdata.referances.length %>") + 1;
+    
+    const langs = <%- JSON.stringify(formdata.candidate_language) %>
+    
+    console.log(langs)
+    
+    langs.forEach(lang => {
+        if (lang.can_read == 1) {
+            document.getElementById(`language_${lang.language_id}_read`).checked = true
+        }
+        if (lang.can_write == 1) {
+            document.getElementById(`language_${lang.language_id}_write`).checked = true
+        }
+        if (lang.can_speak == 1) {
+            document.getElementById(`language_${lang.language_id}_speak`).checked = true
+        }
+    });
+
+    const techs = <%- JSON.stringify(formdata.candidate_technology) %>
+    
+    console.log(techs)
+    
+    techs.forEach(tech => {
+        if (tech.experty_level == 1) {
+            document.getElementById(`technology_${tech.id}_beginer`).checked = true
+        }
+        if (tech.experty_level == 2) {
+            document.getElementById(`technology_${tech.id}_mideator`).checked = true
+        }
+        if (tech.experty_level == 3) {
+            document.getElementById(`technology_${tech.id}_expert`).checked = true
+        }
+    });
+    
+
   </script>
+  <script src="/JS/just-validate.production.min.js"></script>
+  <script src="/JS/validation.js"></script>
+
   <!-- <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
   <script src="/JS/validation.js"></script> -->
   <script src="/JS/script_edit.js"></script>
   <!-- <script src="/JS/language.js"></script> -->
   <!-- <script src="/JS/tech.js"></script> -->
 </body>
-
 </html>

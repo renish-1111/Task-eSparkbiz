@@ -1,15 +1,14 @@
-const StudentRepository = require("../repositories/student.repository")
+const StudentRepository  = require("../repositories/student.repository")
 const pool = require("../db/db.config")
 const studentRepository = new StudentRepository(pool)
 class StudentService {
-
-    async getStudent(data) {
-        let serachString = data.serachString || "";
-        let sorting = data.sorting || "id,asc";
-        let page = data.page || 1;
-        let offset = data.offset || 100;
-        let isAnd = data.isAnd || 0;
-
+    
+    async getStudent( data) {
+        let serachString = data.serachString;
+        let sorting = data.sorting;
+        let page = data.page;
+        let offset = data.offset;
+        let isAnd = data.isAnd || 0; 
 
         if (page < 1) {
             page = 1
@@ -47,57 +46,29 @@ class StudentService {
                 pos.city = count++
             }
         }
-
+         
         serachString = serachString.split(/[$^_\\[\]]/)
         serachString = serachString.slice(1)
 
-        let sqlCondition = []
-        if (serachString[pos.fname]) {
-            sqlCondition.push(`fname LIKE '${serachString[pos.fname]}%'`)
-        }
-        if (serachString[pos.lname]) {
-            sqlCondition.push(`lname LIKE '${serachString[pos.lname]}%'`)
-        }
-        if (serachString[pos.email]) {
-            sqlCondition.push(`email LIKE '${serachString[pos.email]}%'`)
-        }
-        if (serachString[pos.phone]) {
-            sqlCondition.push(`phone LIKE '${serachString[pos.phone]}%'`)
-        }
-        if (serachString[pos.city]) {
-            sqlCondition.push(`city LIKE '${serachString[pos.city]}%'`)
-        }
+        let sqlCondition = [` WHERE fname LIKE '${serachString[pos.fname] || ''}%'`, `lname LIKE '${serachString[pos.lname]}%'`, `email LIKE '${serachString[pos.email]}%'`, `phone LIKE '${serachString[pos.phone]}%'`, `city LIKE '${serachString[pos.city]}%' `]
 
-        if (sqlCondition.length > 0) {
-            sqlCondition[0] = "WHERE " + sqlCondition[0]
-        }
-
-        console.log("Boolean(isAnd)",);
-        
-        if (Boolean(Number(isAnd))) {
-            console.log(sqlCondition);
-            console.log("service AND", isAnd);
-
+        if (isAnd) {
             sqlCondition = sqlCondition.join(" AND ")
         }
         else {
-            console.log(sqlCondition);
-            console.log("service OR", isAnd);
-
             sqlCondition = sqlCondition.join(" OR ")
         }
-
         let sortparameter = sorting.split(",")
-
 
         sqlCondition += ` ORDER BY ${sortparameter[0]} ${sortparameter[1]}`
 
         console.log(sqlCondition);
 
         try {
-            return [await studentRepository.findAll(sqlCondition, limit, offset), await studentRepository.count(sqlCondition)]
+            return await studentRepository.findAll(sqlCondition, limit, offset)           
         } catch (error) {
             console.log(error);
+            
         }
 
 

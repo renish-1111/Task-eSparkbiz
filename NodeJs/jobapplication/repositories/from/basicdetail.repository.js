@@ -10,6 +10,7 @@ class BasicDetailRepository {
         const sql = `INSERT INTO basic_details (fname, lname, email, phone, gender, relationship_status_id, designation, bod) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
         const values = [fname, lname, email, phone, gender, relationshipstatus, designation, bod];
         const [result] = await this.db.execute(sql, values);
+        
         return result.insertId;
     }
 
@@ -31,6 +32,14 @@ class BasicDetailRepository {
         const sql = "DELETE FROM basic_details WHERE id = ?;";
         const value = [id];
         const [result] = await this.db.execute(sql, value)
+
+        return result.affectedRows
+    }
+
+    async updateId(oldid, newid){
+        const sql = "UPDATE basic_details SET id = ? WHERE id = ?"
+        const values = [oldid, newid];
+        const [result] = await this.db.execute(sql,values)
 
         return result.affectedRows
     }

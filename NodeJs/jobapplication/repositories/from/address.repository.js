@@ -15,7 +15,7 @@ class AddressRepository{
 
     async findById(id){
         const sql = 'SELECT candidate_id, address1, address2, `state`, city, zipcode FROM addresses WHERE candidate_id = ?;';
-        const values = [id]
+            const values = [id]
         const [result] = await this.db.execute(sql, values)
 
         return result;

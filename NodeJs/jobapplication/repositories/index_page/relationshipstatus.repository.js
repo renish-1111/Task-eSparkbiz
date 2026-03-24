@@ -1,4 +1,3 @@
-
 class RelationshipStatusRepository {
     constructor(db){
         this.db = db;

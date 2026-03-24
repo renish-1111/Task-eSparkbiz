@@ -1,113 +1,126 @@
 
-let degreeCount = 1
+var degreeCount = 1
 
 function educationAdd() {
-
+const i = degreeCount
   let html = `
-    <div id="degree_${degreeCount}">
+    <div id="degree_${i}">
             <div>Degree</div>
             <div class="flex">
               <div>
-                <label for="course_degree_${degreeCount}">Course Name</label>
-                <input type="text" id="course_degree_${degreeCount}" name="course_name[]" />
+                <label for="course_degree_${i}">Course Name</label>
+                <input type="text" id="course_degree_${i}" name="course_name[]" />
               </div>
               <div>
-                <label for="university_degree_${degreeCount}">University</label>
+                <label for="university_degree_${i}">University</label>
                 <input
                   type="text"
-                  id="university_degree_${degreeCount}"
+                  id="university_degree_${i}"
                   name="university[]"
                 />
               </div>
               <div>
-                <label for="pass_year_degree_${degreeCount}">Passing Year</label>
+                <label for="pass_year_degree_${i}">Passing Year</label>
                 <input
                   type="text"
-                  id="pass_year_degree_${degreeCount}"
+                  id="pass_year_degree_${i}"
                   name="course_pass[]"
                 />
               </div>
               <div>
-                <label for="percentage_degree_${degreeCount}">Percentage</label>
+                <label for="percentage_degree_${i}">Percentage</label>
                 <input
                   type="text"
-                  id="percentage_degree_${degreeCount}"
+                  id="percentage_degree_${i}"
                   name="course_percentage[]"
                 />
               </div>
             </div>
+            <div class="removebtn" id="remove_degree_${i}"> Remove </div>
           </div>
-        <div class="line-bold" id="line_degree_${degreeCount}"></div>
+        <div class="line-bold" id="line_degree_${i}"></div>
 
     `
-  
+
+   
     document.getElementById("addDegree").insertAdjacentHTML("beforeend", html)
     
-    const i = degreeCount
-
-    // window.validator
-    //   .addField(`#course_degree_${i}`, [
-    //         {
-    //             rule: "required",
-    //             errorMessage: "Degree Name is required",
-    //         },
-    //         {
-    //             rule: "customRegexp",
-    //             value: "^\\D*$",
-    //             errorMessage: "Don't Insert Number in Degree Name",
-    //         }
-    //     ])
-    //     .addField(`#university_degree_${i}`, [
-    //         {
-    //             rule: "required",
-    //             errorMessage: "University Name is required",
-    //         },
-    //         {
-    //             rule: "customRegexp",
-    //             value: "^\\D*$",
-    //             errorMessage: "Don't Insert Number in University Name",
-    //         }
-    //     ])
-    //     .addField(`#pass_year_degree_${i}`, [
-    //         {
-    //             rule: "required",
-    //             errorMessage: "Passing Year is required",
-    //         },
-    //         {
-    //             rule: "number",
-    //             errorMessage: "Enter Year in Numaric",
-    //         },
-    //         {
-    //             rule: "minNumber",
-    //             value: 1950,
-    //             errorMessage: "Invalid Year"
-    //         },
-    //         {
-    //             rule: "maxNumber",
-    //             value: 2026,
-    //             errorMessage: "Must complete in 2026"
-    //         }
-    //     ])
-    //     .addField(`#percentage_degree_${i}`, [
-    //         {
-    //             rule: "required",
-    //             errorMessage: "Percentage is required",
-    //         },
-    //         {
-    //             rule: "number",
-    //             errorMessage: "Enter Year in Numaric",
-    //         },
-    //         {
-    //             rule: "minNumber",
-    //             value: 0,
-    //             errorMessage: "Not be nagative"
-    //         },
-    //         {
-    //             rule: "maxNumber",
-    //             value: 100,
-    //             errorMessage: "Not more than 100"
-    //         }
-    //     ])
+    window.validator
+      .addField(`#course_degree_${i}`, [
+            {
+                rule: "required",
+                errorMessage: "Degree Name is required",
+            },
+            {
+                rule: "customRegexp",
+                value: "^\\D*$",
+                errorMessage: "Don't Insert Number in Degree Name",
+            }
+        ])
+        .addField(`#university_degree_${i}`, [
+            {
+                rule: "required",
+                errorMessage: "University Name is required",
+            },
+            {
+                rule: "customRegexp",
+                value: "^\\D*$",
+                errorMessage: "Don't Insert Number in University Name",
+            }
+        ])
+        .addField(`#pass_year_degree_${i}`, [
+            {
+                rule: "required",
+                errorMessage: "Passing Year is required",
+            },
+            {
+                rule: "number",
+                errorMessage: "Enter Year in Numaric",
+            },
+            {
+                rule: "minNumber",
+                value: 1950,
+                errorMessage: "Invalid Year"
+            },
+            {
+                rule: "maxNumber",
+                value: 2026,
+                errorMessage: "Must complete in 2026"
+            }
+        ])
+        .addField(`#percentage_degree_${i}`, [
+            {
+                rule: "required",
+                errorMessage: "Percentage is required",
+            },
+            {
+                rule: "number",
+                errorMessage: "Enter Year in Numaric",
+            },
+            {
+                rule: "minNumber",
+                value: 0,
+                errorMessage: "Not be nagative"
+            },
+            {
+                rule: "maxNumber",
+                value: 100,
+                errorMessage: "Not more than 100"
+            }
+        ])
+        
+ document.getElementById(`remove_degree_${i}`).addEventListener("click", function() {
+   window.validator.removeField(`#course_degree_${i}`);
+   window.validator.removeField(`#university_degree_${i}`);
+   window.validator.removeField(`#pass_year_degree_${i}`);
+   window.validator.removeField(`#percentage_degree_${i}`);
+      let degreeElement = document.getElementById(`degree_${i}`)
+      let degreeLine = document.getElementById(`line_degree_${i}`)
+      if (degreeElement) {
+        degreeElement.remove()
+        degreeLine.remove()
+      }
+    })
 
     degreeCount++
 }
@@ -115,10 +128,10 @@ function educationAdd() {
 function educationRemove() {
   if (degreeCount > 1) {
     degreeCount--
-    // window.validator.removeField(`#course_degree_${degreeCount}`)
-    // window.validator.removeField(`#university_degree_${degreeCount}`)
-    // window.validator.removeField(`#pass_year_degree_${degreeCount}`)
-    // window.validator.removeField(`#percentage_degree_${degreeCount}`)
+    window.validator.removeField(`#course_degree_${degreeCount}`)
+    window.validator.removeField(`#university_degree_${degreeCount}`)
+    window.validator.removeField(`#pass_year_degree_${degreeCount}`)
+    window.validator.removeField(`#percentage_degree_${degreeCount}`)
     const degreeElement = document.getElementById(`degree_${degreeCount}`)
     const degreeLine = document.getElementById(`line_degree_${degreeCount}`)
     if (degreeElement) {
@@ -127,6 +140,7 @@ function educationRemove() {
     }
 }
 }
+
 
 
 let experienceCount = 1
@@ -157,62 +171,62 @@ function experienceAdd() {
   document.getElementById("addExperience").insertAdjacentHTML("beforeend", html)
 
   const i = experienceCount
-  // window.validator
-  //   .addField(`#company_name_${i}`, [
-  //       {
-  //           rule: "required",
-  //           errorMessage: "Comapny Name is required",
-  //       }
-  //   ])
-  //   .addField(`#company_designation_${i}`, [
-  //       {
-  //           rule: "required",
-  //           errorMessage: "Designation is required",
-  //       }
-  //   ])
-  //   .addField(`#company_from_${i}`, [
-  //       {
-  //           rule: "required",
-  //           errorMessage: "Date is required",
-  //       },
-  //       {
-  //           validator: (value, fields) => {
-  //               let curr = new Date()
-  //               let enterValue = new Date(value)
+  window.validator
+    .addField(`#company_name_${i}`, [
+        {
+            rule: "required",
+            errorMessage: "Comapny Name is required",
+        }
+    ])
+    .addField(`#company_designation_${i}`, [
+        {
+            rule: "required",
+            errorMessage: "Designation is required",
+        }
+    ])
+    .addField(`#company_from_${i}`, [
+        {
+            rule: "required",
+            errorMessage: "Date is required",
+        },
+        {
+            validator: (value, fields) => {
+                let curr = new Date()
+                let enterValue = new Date(value)
 
-  //               if (curr >= enterValue) {
-  //                   return true
-  //               }
-  //               else {
-  //                   return false
-  //               }
+                if (curr >= enterValue) {
+                    return true
+                }
+                else {
+                    return false
+                }
 
-  //           },
-  //           errorMessage: "Future date inserted",
-  //       }
+            },
+            errorMessage: "Future date inserted",
+        }
 
-  //   ])
-  //   .addField(`#company_to_${i}`, [
-  //       {
-  //           rule: "required",
-  //           errorMessage: "Date is required",
-  //       }, 
-  //       {
-  //           validator: (value, fields) => {
-  //               let curr = new Date()
-  //               let enterValue = new Date(value)
+    ])
+    .addField(`#company_to_${i}`, [
+        {
+            rule: "required",
+            errorMessage: "Date is required",
+        }, 
+        {
+            validator: (value, fields) => {
+                let curr = new Date()
+                let enterValue = new Date(value)
 
-  //               if (curr >= enterValue) {
-  //                   return true
-  //               }
-  //               else {
-  //                   return false
-  //               }
+                if (curr >= enterValue) {
+                    return true
+                }
+                else {
+                    return false
+                }
 
-  //           },
-  //           errorMessage: "Future date inserted",
-  //       }
-  //   ])
+            },
+            errorMessage: "Future date inserted",
+        }
+    ])
 
   experienceCount++
 
@@ -222,10 +236,10 @@ function experienceRemove() {
   if (experienceCount > 1) {
     experienceCount--
 
-    // window.validator.removeField(`#company_name_${experienceCount}`)
-    // window.validator.removeField(`#company_designation_${experienceCount}`)
-    // window.validator.removeField(`#company_from_${experienceCount}`)
-    // window.validator.removeField(`#company_to_${experienceCount}`)
+    window.validator.removeField(`#company_name_${experienceCount}`)
+    window.validator.removeField(`#company_designation_${experienceCount}`)
+    window.validator.removeField(`#company_from_${experienceCount}`)
+    window.validator.removeField(`#company_to_${experienceCount}`)
 
     const experienceElement = document.getElementById(`experience_${experienceCount}`)
 
@@ -261,49 +275,49 @@ function referanceAdd() {
   document.getElementById("AddReferance").insertAdjacentHTML("beforeend", html)
 
 const i = referanceCount
-  // window.validator
-  //   .addField(`#referance_name_${i}`, [
-  //       {
-  //           rule: "required",
-  //           errorMessage: "Referance Name is required",
-  //       },
-  //       {
-  //           rule: "customRegexp",
-  //           value: "^\\D*$",
-  //           errorMessage: "Don't Insert Number in Referance Name",
-  //       }
-  //   ])
-  //   .addField(`#company_contact_${i}`, [
-  //       {
-  //           rule: "required",
-  //           errorMessage: "Phone number is required",
-  //       },
-  //       {
-  //           rule: "number",
-  //           errorMessage: "Phone number must be a number",
-  //       },
-  //       {
-  //           rule: "minLength",
-  //           value: 10,
-  //           errorMessage: "Phone number must be at least 10 digits",
-  //       },
-  //       {
-  //           rule: "maxLength",
-  //           value: 10,
-  //           errorMessage: "Phone number must be no more than 10 digits",
-  //       }
-  //   ])
-  //   .addField(`#company_relation_${i}`, [
-  //       {
-  //           rule: "required",
-  //           errorMessage: "Relation is required",
-  //       },
-  //       {
-  //           rule: "customRegexp",
-  //           value: "^\\D*$",
-  //           errorMessage: "Don't Insert Number in Relation",
-  //       }
-  //   ])
+  window.validator
+    .addField(`#referance_name_${i}`, [
+        {
+            rule: "required",
+            errorMessage: "Referance Name is required",
+        },
+        {
+            rule: "customRegexp",
+            value: "^\\D*$",
+            errorMessage: "Don't Insert Number in Referance Name",
+        }
+    ])
+    .addField(`#company_contact_${i}`, [
+        {
+            rule: "required",
+            errorMessage: "Phone number is required",
+        },
+        {
+            rule: "number",
+            errorMessage: "Phone number must be a number",
+        },
+        {
+            rule: "minLength",
+            value: 10,
+            errorMessage: "Phone number must be at least 10 digits",
+        },
+        {
+            rule: "maxLength",
+            value: 10,
+            errorMessage: "Phone number must be no more than 10 digits",
+        }
+    ])
+    .addField(`#company_relation_${i}`, [
+        {
+            rule: "required",
+            errorMessage: "Relation is required",
+        },
+        {
+            rule: "customRegexp",
+            value: "^\\D*$",
+            errorMessage: "Don't Insert Number in Relation",
+        }
+    ])
     
 
   referanceCount++
@@ -313,9 +327,9 @@ function referanceRemove() {
   if (referanceCount > 1) {
     referanceCount--
 
-    // window.validator.removeField(`#referance_name_${referanceCount}`)
-    // window.validator.removeField(`#company_contact_${referanceCount}`)
-    // window.validator.removeField(`#company_relation_${referanceCount}`)
+    window.validator.removeField(`#referance_name_${referanceCount}`)
+    window.validator.removeField(`#company_contact_${referanceCount}`)
+    window.validator.removeField(`#company_relation_${referanceCount}`)
     
     const referanceElement = document.getElementById(`referance_${referanceCount}`)
     const referanceLine = document.getElementById(`line_referance_${referanceCount}`)

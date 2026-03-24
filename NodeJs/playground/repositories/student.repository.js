@@ -9,18 +9,11 @@ class StudentRepository{
         let values = [String(limit),String(offset)];
 
         let sql = 'SELECT id, fname, lname, email, phone, city FROM student ' + sqlCondition +' LIMIT ? , ? ;'
-                
+        
+        console.log(sql, values);
+        
         const [result] = await this.db.execute(sql, values)
-        
-        return result
-    }
-    async count(sqlCondition){
-        
-
-        let sql = 'SELECT COUNT(id) AS total FROM student ' + sqlCondition 
-                
-        const [result] = await this.db.execute(sql)
-        console.log(result);
+        console.log("result",result);
         
         return result
     }
